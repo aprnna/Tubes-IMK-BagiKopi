@@ -7,8 +7,8 @@ export default function Home() {
   }
   getUser()
   return (
-    <section>
-      <h1>Home</h1>
+    <section className='h-[110vh] bg-white'>
+      <h1 className='text-center'>Home</h1>
     </section>
   )
 }

@@ -18,10 +18,10 @@ export default function ProtectedRoute({children}) {
 
     return () => subscription.unsubscribe()
   }, [])
-  if (!session && !loading) {
-    return <Navigate to="/login" />
+  if (!session) {
+    return !loading && <Navigate to="/login" />
   }
   else {
-    return children ? children : <Outlet/>
+    return !loading && children ? children : <Outlet/>
   }
 }
