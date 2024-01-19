@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
+body {
+  font-family: 'Poppins', sans-serif;
+}
 
 @layer components {
   .btn-primary {
@@ -18,6 +22,7 @@
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 /* Track */
@@ -28,7 +33,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #d0d0d0; 
   border-radius: 5px;
 }
 

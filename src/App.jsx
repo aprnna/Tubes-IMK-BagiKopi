@@ -6,6 +6,8 @@ import ProtectedRoute from "./utils/protectedRoute";
 import Profile from "./pages/profile";
 import LayoutMobile from "./layouts/layoutMobile";
 import { AuthContextProvider } from "./contexts/auth-context";
+import Menu from "./pages/menu";
+import DetailProduct from "./pages/detailProduct";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/product-list" element={<Menu />} />
+            <Route path="/product-list/:id" element={<DetailProduct />} />
             <Route element={<ProtectedRoute/>}>
               <Route path="/profile" element={<Profile/>} />
             </Route>
