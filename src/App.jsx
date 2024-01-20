@@ -22,9 +22,9 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product-list" element={<Menu />} />
             <Route path="/product-list/:id" element={<DetailProduct />} />
-            <Route path="/checkout" element={<Checkout/>} />
-            <Route path="/payment" element={<Payment/>}/>
             <Route element={<ProtectedRoute/>}>
+              <Route path="/checkout" element={<Checkout/>} />
+              <Route path="/payment" element={<Payment/>}/>
               <Route path="/profile" element={<Profile/>} />
             </Route>
           </Route>

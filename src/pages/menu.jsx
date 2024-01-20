@@ -26,6 +26,7 @@ export default function Menu() {
       setCategories(data);
     }
     async function getCart() {
+      if(!user) return;
       const { data } = await supabase.from("orders").select().eq('id_user', user.id).eq('oncart', true);
       setCart(data);
     }
@@ -36,8 +37,6 @@ export default function Menu() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
-  
-
   function handleSearch(e) {
     setSearch(e.target.value);
     setSearchData(products.filter((product) => product.name_product.toLowerCase().includes(search.toLowerCase())));

@@ -47,6 +47,7 @@ export default function DetailProduct() {
   }
 
   async function addToCart(){
+    if(!user) return navigate('/login')
     const { error } = await supabase
     .from('orders')
     .insert(
