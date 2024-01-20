@@ -43,7 +43,7 @@ export default function HistoryTransaction() {
             <div key={transaction.id} className='bg-white p-4'>
               <div className='flex justify-between items-center border-b-2 border-black py-2'>
                 <div>
-                  <h1>test</h1>
+                  <h1 className='font-bold'>{user?.name}</h1>
                   <h1>{getFullDate(transaction.created_at)}</h1>
                 </div>
                 <h1>{transaction.status}</h1>
@@ -60,7 +60,7 @@ export default function HistoryTransaction() {
                         </div>
                       </div>
                       <div className='min-w-fit'>
-                        <h1>Rp. {item.subtotal}</h1>
+                        <h1 className='font-bold'>Rp. {item.subtotal}</h1>
                         <h1 className='text-end'>{item.quantity} Item</h1>
                       </div>
                     </div>
