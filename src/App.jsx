@@ -8,6 +8,8 @@ import LayoutMobile from "./layouts/layoutMobile";
 import { AuthContextProvider } from "./contexts/auth-context";
 import Menu from "./pages/menu";
 import DetailProduct from "./pages/detailProduct";
+import Checkout from "./pages/checkout";
+import { Payment } from "./pages/payment";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product-list" element={<Menu />} />
             <Route path="/product-list/:id" element={<DetailProduct />} />
+            <Route path="/checkout" element={<Checkout/>} />
+            <Route path="/payment" element={<Payment/>}/>
             <Route element={<ProtectedRoute/>}>
               <Route path="/profile" element={<Profile/>} />
             </Route>

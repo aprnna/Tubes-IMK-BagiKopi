@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
 import { TruncateText } from '../utils/truncateText'
 export default function ProductItem({product}) {
-  const {id, name_product:name, img_link, price, description} = product
+  const {id, name, img_link, price, description} = product
   return (
     <Link to={`${id}`} className='flex border-t-2 p-4'>
       <img src={img_link} alt='product-img' className='aspect-square w-28 rounded-md'/>

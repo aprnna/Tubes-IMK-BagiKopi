@@ -1,98 +1,96 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { supabase } from "../lib/api";
+import { useAuth } from "../contexts/auth-context";
+import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 export function Payment() {
+  const user = useAuth(); 
+  const [selectedMethod, setSelectedMethod] = useState('')
+  const [orders, setOrders] = useState([]);
+  const totalPrice = orders?.reduce((total, item) => total + item.subtotal, 0);
+  const navigate = useNavigate()
+  useEffect(() => {
+    async function getOrders(){
+      const { data } = await supabase.from('orders').select().eq('id_user', user.id).eq('oncart', true)
+      setOrders(data)
+    }
+    getOrders()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  async function handlePayment(){
+    const { data, error:error1 } = await supabase.from('transactions').insert(
+      { 
+        id_user: user.id,
+        status: 'success',
+        total: totalPrice, 
+        method: selectedMethod,
+      }
+    ).select().single()
+    if(error1) return alert(error1.message)
+    const { error:error2 } = await supabase.from('orders').update({ id_transaction:data.id,oncart: false }).eq('id_user', user.id).eq('oncart', true)
+    if(error2) return alert(error2.message)
+    alert('Berhasil melakukan pembayaran')
+    navigate('/product-list')
+  }
   return (
-    <div className="flex max-w-[480px] w-full flex-col items-center mx-auto">
-      <span className="bg-stone-100 self-stretch flex w-full flex-col items-center mt-3.5 pt-5 pb-px px-5">
-        <div className="text-black text-center text-xl font-bold">
-          Pembayaran
-        </div>
-        <div className="text-black text-center text-3xl font-bold w-[244px] mt-10">
-          Rp 20.000
-          <br />
-        </div>
-        <div className="bg-white self-stretch flex items-stretch justify-between gap-5 mt-6 pl-5 pr-14 py-3 rounded-[34px]">
-          <div className="flex flex-col items-start">
-            <span className="flex w-[127px] max-w-full items-stretch gap-4 ml-4">
-              <img
-                loading="lazy"
-                alt=""
-                srcSet="..."
-                className="aspect-[1.12] object-contain object-center w-full overflow-hidden shrink-0 flex-1 rounded-[50%]"
-              />
-              <div className="text-black text-center text-lg font-bold self-center my-auto">
-                Gopay
+    <>
+      <section className="min-h-screen">
+        <header className="text-center p-4">
+          <h4 className="text-lg font-bold py-4">Pembayaran</h4>
+          <h1 className="text-2xl font-bold">Rp. {totalPrice}</h1>
+        </header>
+        <section className="p-4 space-y-4">
+          { methodPayment.map((method) => {
+            return (
+              <div key={method.id} className='flex justify-between items-center'>
+                <label htmlFor={method.id} className="flex items-center gap-5">
+                  {method.icon ? <img src={method.icon} alt="icon-payment" className="h-12"/>: <FontAwesomeIcon icon={faSackDollar} size="2xl" className="mx-3"/>}
+                  <span>{method.name}</span>
+                </label> 
+                <input type="radio" name="payment" id={method.id} onClick={()=>setSelectedMethod(method.name)} className="w-4 h-4 text-blue-600 bg-pink-300  focus:ring-blue-500 focus:ring-2"/>
               </div>
-            </span>
-            <span className="self-stretch flex items-stretch justify-between gap-1 mt-5">
-              <img
-                loading="lazy"
-                srcSet="..."
-                alt=""
-                className="aspect-[1.52] object-contain object-center w-[88px] overflow-hidden shrink-0 max-w-full rounded-[50%]"
-              />
-              <div className="text-black text-lg font-bold my-auto">Ovo</div>
-            </span>
-            <div className="self-stretch flex flex-col items-stretch mt-5 pl-4">
-              <span className="flex items-stretch justify-between gap-4">
-                <img
-                  loading="lazy"
-                  srcSet="..."
-                  alt=""
-                  className="aspect-[1.12] object-contain object-center w-[58px] overflow-hidden shrink-0 max-w-full rounded-[50%]"
-                />
-                <div className="text-black text-lg font-bold mt-3">Dana</div>
-              </span>
-              <span className="flex items-stretch justify-between gap-4 mt-5">
-                <img
-                  loading="lazy"
-                  srcSet="..."
-                  alt=""
-                  className="aspect-[1.12] object-contain object-center w-[58px] overflow-hidden shrink-0 max-w-full rounded-[50%]"
-                />
-                <div className="text-black text-lg font-bold my-auto">Qris</div>
-              </span>
-              <span className="flex items-stretch justify-between gap-4 mt-5">
-                <img
-                  loading="lazy"
-                  srcSet="..."
-                  alt=""
-                  className="aspect-[1.09] object-contain object-center w-[58px] overflow-hidden shrink-0 max-w-full rounded-[50%]"
-                />
-                <div className="text-black text-lg font-bold self-center grow whitespace-nowrap my-auto">
-                  Shopeepay
-                </div>
-              </span>
-              <span className="flex items-stretch justify-between gap-4 mt-9">
-                <div className="flex w-[58px] shrink-0 h-[52px] flex-col rounded-[50%]" />
-                <div className="text-black text-lg font-bold my-auto">
-                  Bayar ditempat
-                </div>
-              </span>
-            </div>
-          </div>
-          <div className="self-center flex flex-col items-stretch my-auto">
-            <div className="flex shrink-0 h-[27px] flex-col rounded-[50%]" />
-            <div className="flex shrink-0 h-[27px] flex-col mt-12 rounded-[50%]" />
-            <div className="flex shrink-0 h-[27px] flex-col mt-11 rounded-[50%]" />
-            <div className="flex shrink-0 h-[27px] flex-col mt-12 rounded-[50%]" />
-            <div className="flex shrink-0 h-[26px] flex-col mt-12 rounded-[50%]" />
-            <div className="flex shrink-0 h-[27px] flex-col mt-14 rounded-[50%]" />
-          </div>
-        </div>
-        <div className="bg-stone-100 self-stretch flex flex-col justify-center items-stretch mt-14 px-8 py-5">
-          <span className="text-black text-center text-xl font-bold bg-orange-200 items-center pt-6 pb-4 px-16 rounded-3xl">
-            Bayar
-          </span>
-        </div>
-      </span>
-      <img
-        loading="lazy"
-        alt=""
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a40a9395c6ad5f3a17f4b5c54650640e29eb573121df1fad1938a92095f31241?"
-        className="aspect-[51.67] object-contain object-center w-[155px] stroke-[6px] stroke-white overflow-hidden max-w-full mt-32"
-      />
-    </div>
+            )
+          })}
+        </section>
+      </section>
+      <section className="sticky bottom-0 p-4">
+        <button onClick={handlePayment} className="w-full bg-blue-500 text-white py-3">Bayar</button>
+      </section>
+    </>
+    
   );
 }
 
+const methodPayment = [
+  {
+    id: 1,
+    name: 'Gopay',
+    icon: '/assets/gopay.png'
+  },
+  {
+    id: 2,
+    name: 'OVO',
+    icon: '/assets/ovo.png'
+  },
+  {
+    id: 3,
+    name: 'Dana',
+    icon: '/assets/dana.png'
+  },
+  {
+    id: 4,
+    name: 'Qris',
+    icon: '/assets/qris.png'
+  },
+  {
+    id: 5,
+    name: 'Shopeepay',
+    icon: '/assets/shopeepay.png'
+  },
+  {
+    id: 6,
+    name: 'Bayar Ditempat',
+  }
+]
