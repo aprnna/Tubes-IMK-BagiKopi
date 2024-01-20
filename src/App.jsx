@@ -10,6 +10,7 @@ import Menu from "./pages/menu";
 import DetailProduct from "./pages/detailProduct";
 import Checkout from "./pages/checkout";
 import { Payment } from "./pages/payment";
+import HistoryTransaction from "./pages/historyTransaction";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/payment" element={<Payment/>}/>
             <Route element={<ProtectedRoute/>}>
               <Route path="/profile" element={<Profile/>} />
+              <Route path="/history-transaction" element={<HistoryTransaction/>}/>
             </Route>
           </Route>
           <Route path="*" element={<h1>404 Not Found</h1>} />
