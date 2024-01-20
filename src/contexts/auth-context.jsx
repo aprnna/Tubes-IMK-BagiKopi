@@ -9,19 +9,22 @@ export function AuthContextProvider({children}){
     name:'',
     role:'',
     age:0,
+    signIn:false,
   })
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
     async function getUser(){
-      const { data: { user } } = await supabase.auth.getUser()
-      const { data } = await supabase.from('users').select().eq('id', user.id).single();
+      const { error,data: { user } } = await supabase.auth.getUser()
+      if (error) return setLoading(false)
+      const { data } = await supabase.from('users').select().eq('id', user?.id).single();
       setUser({
-        id: user.id,
-        email: user.email,
-        name: data.name,
-        age: data.age,
-        role: data.role,
+        id: user?.id,
+        email: user?.email,
+        name: data?.name,
+        age: data?.age,
+        role: data?.role,
+        signIn: true,
       })
       setLoading(false)
     }

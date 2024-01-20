@@ -15,7 +15,6 @@ export default function Menu() {
   const [searchData, setSearchData] = useState([]);
   const [loading, setLoading] = useState(true);
   const totalPrice = cart?.reduce((total, item) => total + item.subtotal, 0);
-
   useEffect(() => {
     async function getProducts() {
       const { data } = await supabase.from("products").select().order('id_category');
@@ -26,8 +25,7 @@ export default function Menu() {
       setCategories(data);
     }
     async function getCart() {
-      if(!user) return;
-      const { data } = await supabase.from("orders").select().eq('id_user', user.id).eq('oncart', true);
+      const { data } = await supabase.from("orders").select().eq('id_user', user?.id).eq('oncart', true);
       setCart(data);
     }
     getProducts();
@@ -86,7 +84,7 @@ export default function Menu() {
         </section>
       </section>
       <section className='bg-white sticky bottom-0'>
-        {cart.length !== 0 && (
+        {cart && cart.length !== 0 && (
           <div className=' p-4 px-5 flex justify-between items-center'>
             <div className='flex gap-4'>
               <h1 className='font-bold'><FontAwesomeIcon icon={faCartShopping}/></h1>

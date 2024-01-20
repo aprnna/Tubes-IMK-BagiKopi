@@ -8,6 +8,7 @@ import { useAuth } from '../contexts/auth-context'
 export default function DetailProduct() {
   const navigate = useNavigate()
   const user = useAuth()
+  console.log(user)
   const [product, setProduct] = useState({})
   const [cupSize, setCupSize] = useState([])
   const [selectedCupSize, setSelectedCupSize] = useState('Reguler')
@@ -47,7 +48,7 @@ export default function DetailProduct() {
   }
 
   async function addToCart(){
-    if(!user) return navigate('/login')
+    if(!user.signIn) return navigate('/login')
     const { error } = await supabase
     .from('orders')
     .insert(
