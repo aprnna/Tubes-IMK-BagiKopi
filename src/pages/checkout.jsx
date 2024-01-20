@@ -32,7 +32,7 @@ export default function Checkout() {
       <section className='min-h-[90vh] bg-gray-100 space-y-4'>
         <header className='p-4 relative bg-white shadow-md'>
           <Link to='/product-list' className='absolute '><FontAwesomeIcon icon={faCircleArrowLeft} size='lg'/></Link>
-          <h1 className='font-bold text-center flex-1'>Checkout</h1>  
+          <h1 className='font-bold text-center'>Checkout</h1>  
         </header>
         <section className='bg-white p-4'>
           <h1 className='font-bold text-lg'>Informasi Pesanan</h1>
