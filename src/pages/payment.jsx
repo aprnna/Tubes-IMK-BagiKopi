@@ -3,9 +3,10 @@ import { supabase } from "../lib/api";
 import { useAuth } from "../contexts/auth-context";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export function Payment() {
   const user = useAuth(); 
+  const { tn } = useParams();
   const [selectedMethod, setSelectedMethod] = useState('')
   const [orders, setOrders] = useState([]);
   const totalPrice = orders?.reduce((total, item) => total + item.subtotal, 0);
@@ -26,6 +27,7 @@ export function Payment() {
         status: 'success',
         total: totalPrice, 
         method: selectedMethod,
+        table_number: tn
       }
     ).select().single()
     if(error1) return alert(error1.message)

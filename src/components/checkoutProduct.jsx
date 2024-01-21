@@ -34,9 +34,9 @@ export default function CheckoutProduct({ cart, product }) {
       <div className='flex justify-between'>
         <h1 className='font-bold'>Rp. {subtotal}</h1>
         <div className='flex gap-4'>
-          <button onClick={()=>decreaseQuantity()}><FontAwesomeIcon icon={faCircleMinus}/></button>
+          <button onClick={()=>decreaseQuantity()}><FontAwesomeIcon icon={faCircleMinus} className='text-accent1'/></button>
           <h1 className='font-bold'>{quantity}</h1>
-          <button onClick={()=>increaseQuantity()}><FontAwesomeIcon icon={faCirclePlus}/></button>
+          <button onClick={()=>increaseQuantity()}><FontAwesomeIcon icon={faCirclePlus} className='text-accent1'/></button>
         </div>
       </div>
     </>

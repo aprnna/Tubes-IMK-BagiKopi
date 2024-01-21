@@ -32,7 +32,7 @@ export default function HistoryTransaction() {
   },[])
   return (
     <section>
-      <header className='p-4 relative bg-blue-800 text-white shadow-md'>
+      <header className='p-4 relative bg-accent3 text-white shadow-md'>
         <Link to='/product-list' className='absolute hidden'><FontAwesomeIcon icon={faCircleArrowLeft} size='lg'/></Link>
         <h1 className='font-bold text-center'>Pesanan Saya</h1>  
       </header>
@@ -41,7 +41,7 @@ export default function HistoryTransaction() {
           const detail = detailTransaction.filter((detail) => detail.id_transaction === transaction.id)
           return (
             <div key={transaction.id} className='bg-white p-4'>
-              <div className='flex justify-between items-center border-b-2 border-black py-2'>
+              <div className='flex justify-between items-center border-b-[1px] border-black py-2'>
                 <div>
                   <h1 className='font-bold'>{user?.name}</h1>
                   <h1>{getFullDate(transaction.created_at)}</h1>

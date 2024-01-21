@@ -25,7 +25,7 @@ function App() {
             <Route path="/product-list/:id" element={<DetailProduct />} />
             <Route element={<ProtectedRoute/>}>
               <Route path="/checkout" element={<Checkout/>} />
-              <Route path="/payment" element={<Payment/>}/>
+              <Route path="/payment/:tn" element={<Payment/>}/>
               <Route path="/profile" element={<Profile/>} />
               <Route path="/history-transaction" element={<HistoryTransaction/>}/>
             </Route>

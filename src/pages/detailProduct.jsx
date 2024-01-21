@@ -8,7 +8,6 @@ import { useAuth } from '../contexts/auth-context'
 export default function DetailProduct() {
   const navigate = useNavigate()
   const user = useAuth()
-  console.log(user)
   const [product, setProduct] = useState({})
   const [cupSize, setCupSize] = useState([])
   const [selectedCupSize, setSelectedCupSize] = useState('Reguler')
@@ -16,7 +15,7 @@ export default function DetailProduct() {
   const [subTotal, setSubTotal] = useState(0)
   const [qty, setQty] = useState(1)
   const { id } = useParams()
-  const { name_product:name, description, img_link, price }  = product
+  const { name, description, img_link, price }  = product
   useEffect(() => {
     async function getProduct() {
       const { data } = await supabase.from("products").select().eq('id', id).single();
@@ -65,7 +64,6 @@ export default function DetailProduct() {
     alert('Berhasil ditambahkan ke keranjang')
     navigate('/product-list')
   }
-  console.log(cupSize)
   return (
     <>
       <section className='min-h-[90vh]'>
@@ -77,20 +75,27 @@ export default function DetailProduct() {
           <h1 className='text-lg font-bold'>{name}</h1>
           <p className='text-gray-500'>{description}</p>
         </section>
-        <section className='px-4 space-y-4'>
-          <h1 className='font-bold'>Pilih Ukuran</h1>
-          <div className='flex gap-2'>
-          {cupSize.map((cup) => {
-            return(
-              <button key={cup.id} className={`text-center p-4 bg-gray-200 rounded-lg hover:bg-gray-300 ${selectedCupSize === cup.cupsize?'bg-orange-100 hover:bg-orange-100':''}`} onClick={()=>handleSelectCupSize(cup.cupsize,cup.price)}>
-                <h1>{cup.cupsize[0] === '1' ? "1L" : cup.cupsize[0]}</h1>
-                <h3>{cup.cupsize}</h3>
-                <p className='text-xs'>+ Rp. {cup.price}</p>
-              </button>
-            )
-          })}
-          </div>
-        </section>
+        {cupSize.length !== 0 && (
+          <section className='px-4 space-y-4'>
+            <h1 className='font-bold'>Pilih Ukuran</h1>
+            <div className='flex gap-2'>
+            {cupSize.map((cup) => {
+              return(
+                <button 
+                  key={cup.id} 
+                  className={`text-center p-4 bg-gray-200 rounded-lg hover:bg-accent3/60 ${selectedCupSize === cup.cupsize?'bg-accent3/45 hover:bg-accent3/45':''}`} 
+                  onClick={()=>handleSelectCupSize(cup.cupsize,cup.price)}
+                >
+                  <h1 className='font-bold'>{cup.cupsize[0] === '1' ? "1L" : cup.cupsize[0]}</h1>
+                  <h3 className='text-sm'>{cup.cupsize}</h3>
+                  <p className='text-xs'>+ Rp. {cup.price}</p>
+                </button>
+              )
+            })}
+            </div>
+          </section>
+        )}
+        
       </section>
       <section className='sticky bottom-0 bg-gray-100 p-4 space-y-4'>
         <div className='flex justify-between'>

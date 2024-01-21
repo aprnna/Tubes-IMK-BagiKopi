@@ -37,7 +37,7 @@ export default function Menu() {
   
   function handleSearch(e) {
     setSearch(e.target.value);
-    setSearchData(products.filter((product) => product.name_product.toLowerCase().includes(search.toLowerCase())));
+    setSearchData(products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase())));
   }
 
   if (loading) return <div>Loading...</div>;
@@ -52,7 +52,7 @@ export default function Menu() {
                 const categoryByAvailProduct = products.filter((product) => product.id_category === category.id);
                 if(categoryByAvailProduct.length === 0) return null;
                 return (
-                  <a key={category.id} href={`#${category.id}`} className={`border-2 rounded-2xl px-3 py-1 min-w-fit ${selectedCategory === category.id?"bg-orange-200":""}`} onClick={()=>setSelectedCategory(category.id)}>{category.name_category}</a>
+                  <a key={category.id} href={`#${category.id}`} className={`border-2 rounded-2xl px-3 py-1 min-w-fit ${selectedCategory === category.id?"bg-accent3 text-white":""}`} onClick={()=>setSelectedCategory(category.id)}>{category.name_category}</a>
                 )
               })} 
             </div>
@@ -90,7 +90,7 @@ export default function Menu() {
               <h1 className='font-bold'><FontAwesomeIcon icon={faCartShopping}/></h1>
               <h1 className='font-bold'>Rp. {totalPrice}</h1>
             </div>
-            <Link className='bg-orange-200 rounded-xl px-4 py-2' to='/checkout'>Checkout</Link>
+            <Link className='btn-primary' to='/checkout'>Checkout</Link>
           </div>
         )}
       </section>
