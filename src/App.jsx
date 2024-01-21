@@ -13,7 +13,7 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<LayoutMobile/>}>
-            <Route index element={<Home />} />
+            <Route index element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route element={<ProtectedRoute/>}>
