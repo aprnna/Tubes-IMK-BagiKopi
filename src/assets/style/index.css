@@ -7,10 +7,12 @@
   .btn-primary {
     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
+
   .btn-light {
     @apply py-2 px-4 text-white font-semibold rounded-lg shadow-sm hover:bg-gray-600/20 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
-  .input-text{
+
+  .input-text {
     @apply py-2 px-4 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
 }
@@ -28,7 +30,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 5px;
 }
 
