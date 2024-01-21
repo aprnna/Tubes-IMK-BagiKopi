@@ -6,6 +6,7 @@ import ProtectedRoute from "./utils/protectedRoute";
 import Profile from "./pages/profile";
 import LayoutMobile from "./layouts/layoutMobile";
 import { AuthContextProvider } from "./contexts/auth-context";
+import DetailProfile from "./pages/detailProfile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/detailProfile" element={<DetailProfile />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
             </Route>
