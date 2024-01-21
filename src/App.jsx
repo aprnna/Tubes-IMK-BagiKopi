@@ -1,4 +1,4 @@
-import { BrowserRouter,Route,Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -12,12 +12,12 @@ function App() {
     <BrowserRouter>
       <AuthContextProvider>
         <Routes>
-          <Route path="/" element={<LayoutMobile/>}>
+          <Route path="/" element={<LayoutMobile />}>
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route element={<ProtectedRoute/>}>
-              <Route path="/profile" element={<Profile/>} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
           <Route path="*" element={<h1>404 Not Found</h1>} />
