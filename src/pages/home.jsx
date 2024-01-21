@@ -3,7 +3,7 @@ import { supabase } from '../lib/api'
 export default function Home() {
   async function getUser() {
     const { data: { user } } = await supabase.auth.getUser()
-    console.log(user)
+    // console.log(user)
   }
   getUser()
   const bgBanner = {
