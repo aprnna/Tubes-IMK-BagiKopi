@@ -40,22 +40,15 @@ export default function Register() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center p-10">
-      <div
-        className="rounded-t-md overflow-hidden"
-        style={{ backgroundColor: '#0077f9', width: '100%', maxHeight: '50%', position: 'relative' }}
-      >
+    <div className="h-screen flex flex-col justify-center items-center  bg-[#0077f9]">
+      <div className="rounded-t-md overflow-hidden w-full h-full flex justify-center items-center">
         <img
           src={logobagi}
           alt="logobagi"
-          className="w-full h-full object-cover"
-          style={{ backgroundColor: '#0077f9' }}
+          className=" object-cover h-4/5"
         />
       </div>
-
-      <section
-        className="bg-white rounded-b-md shadow-md p-10 w-full max-w-md"
-      >
+      <section className="bg-white rounded-b-md shadow-md p-10 w-full max-w-md rounded-t-3xl">
         <h1 className="font-bold text-xl text-center mb-4">Register</h1>
         <form onSubmit={handleRegister} className="flex flex-col space-y-3">
           <input name="email" type="text" placeholder="Email" className="input-text" onChange={handleChange} />
