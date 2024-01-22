@@ -17,8 +17,8 @@ export default function Home() {
   return (
     <section className='h-[110vh] bg-white'>
       <div class="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}>
-        <button class="w-11 h-11 bg-[#32acff] rounded-full absolute top-3 right-3">
-          <img src='\images\bell.png' alt='bell' width="25" class="absolute inset-0 top-2 left-2.5 hidden" />
+        <button class="w-11 h-11 bg-[#32acff] rounded-full absolute top-3 right-3  hidden">
+          <img src='\images\bell.png' alt='bell' width="25" class="absolute inset-0 top-2 left-2.5" />
         </button>
       </div>
       <div class="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
