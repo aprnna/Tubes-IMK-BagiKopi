@@ -83,7 +83,7 @@ export default function Menu() {
           }
         </section>
       </section>
-      <section className='bg-white sticky bottom-0'>
+      <section className='bg-white sticky bottom-5'>
         {cart && cart.length !== 0 && (
           <div className=' p-4 px-5 flex justify-between items-center'>
             <div className='flex gap-4'>

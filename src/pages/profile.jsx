@@ -27,11 +27,6 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // async function handleLogout(e) {
-  //   e.preventDefault()
-  //   const { error } = await supabase.auth.signOut()
-  //   if (error) return alert(error.message)
-  // }
   async function handleUpdateProfile(e) {
     e.preventDefault()
     const { error } = await supabase

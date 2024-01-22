@@ -1,11 +1,19 @@
+import { Link } from "react-router-dom"
+import { supabase } from "../lib/api"
+
 export default function DetailProfile() {
+    async function handleLogout(e) {
+        e.preventDefault()
+        const { error } = await supabase.auth.signOut()
+        if (error) return alert(error.message)
+    }
     return (
-        <section class='h-[110vh] bg-white'>
+        <section class='bg-white'>
             <div class="w-full h-48 bg-[#006eb9] relative">
                 <button><img src='\images\backarrow.png' alt='back' width="35" class="absolute ml-4 -mt-2" /></button>
                 <img src='\images\profilepicture.jpg' alt='back' width="75" class="absolute rounded-full ml-14 mt-8" />
                 <p class="absolute text-lg text-white font-semibold ml-14 mt-28">Hello, Apriana</p>
-                <button><img src='\images\edit.png' alt='edit' width="15" class="absolute ml-[180px] mt-[125px]" /></button>
+                <Link to='/profile-edit'><img src='\images\edit.png' alt='edit' width="15" class="absolute ml-[180px] mt-[125px]" /></Link>
             </div>
             <div class="max-w-lg h-20 border bg-white mx-auto mt-4 p-5 ml-4 mr-4 rounded-t-lg">
                 <div class="relative">
@@ -29,7 +37,7 @@ export default function DetailProfile() {
                 </div>
             </div>
             <div class="w-full p-4">
-                <button class="h-12 w-full bg-[#c93827] mt-4 rounded-xl text-white text-lg font-bold">Log Out</button>
+                <button class="h-12 w-full bg-[#c93827] mt-4 rounded-xl text-white text-lg font-bold" onClick={(e)=> handleLogout(e)}>Log Out</button>
             </div>
         </section>
     )
