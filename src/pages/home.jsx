@@ -18,7 +18,7 @@ export default function Home() {
       "url(/images/picture2.jpg)"
   }
   return (
-    <section className='h-[110vh] bg-white'>
+    <section className='bg-white'>
       <div class="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}/>
       <div class="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
         <p class="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
