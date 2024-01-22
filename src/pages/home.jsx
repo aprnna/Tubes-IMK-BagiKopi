@@ -1,11 +1,7 @@
 import React from 'react'
-import { supabase } from '../lib/api'
+import { useAuth } from '../contexts/auth-context'
 export default function Home() {
-  async function getUser() {
-    const { data: { user } } = await supabase.auth.getUser()
-    // console.log(user)
-  }
-  getUser()
+  const user = useAuth()
   const bgBanner = {
     backgroundImage:
       "url(/images/banner.jpg)"
@@ -22,11 +18,11 @@ export default function Home() {
     <section className='h-[110vh] bg-white'>
       <div class="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}>
         <button class="w-11 h-11 bg-[#32acff] rounded-full absolute top-3 right-3">
-          <img src='\images\bell.png' alt='bell' width="25" class="absolute inset-0 top-2 left-2.5" />
+          <img src='\images\bell.png' alt='bell' width="25" class="absolute inset-0 top-2 left-2.5 hidden" />
         </button>
       </div>
       <div class="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
-        <p class="font-medium text-lg">Halo Apriana, ingin pesan apa hari ini?</p>
+        <p class="font-medium text-lg">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
       </div>
       <div class="flex">
         <div class="w-1/2 border h-28 bg-white rounded-xl mx-auto shadow-lg p-5 relative mr-2 ml-2 text-center">

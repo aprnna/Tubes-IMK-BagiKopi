@@ -27,11 +27,11 @@ export default function Profile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  async function handleLogout(e) {
-    e.preventDefault()
-    const { error } = await supabase.auth.signOut()
-    if (error) return alert(error.message)
-  }
+  // async function handleLogout(e) {
+  //   e.preventDefault()
+  //   const { error } = await supabase.auth.signOut()
+  //   if (error) return alert(error.message)
+  // }
   async function handleUpdateProfile(e) {
     e.preventDefault()
     const { error } = await supabase
@@ -66,7 +66,7 @@ export default function Profile() {
       <div class="w-full h-auto relative">
         <div class="h-28 rounded-full relative w-28 bg-cover top-9 left-40" style={bgPicture2}>
           <button>
-            <img src='\images\gallery.png' alt='edit PIcture' width="20" class="absolute bottom-2 right-2" />
+            <img src='\images\gallery.png' alt='edit' width="20" class="absolute bottom-2 right-2" />
           </button>
         </div>
         <div class="w-full h-96 mt-14 relative">
