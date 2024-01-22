@@ -26,8 +26,8 @@ function App() {
             <Route path="/product-list" element={<Menu />} />
             <Route path="/product-list/:id" element={<DetailProduct />} />
             <Route element={<ProtectedRoute/>}>
-              <Route path="/detailProfile" element={<DetailProfile />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<DetailProfile />} />
+              <Route path="/profile-edit" element={<Profile />} />
               <Route path="/checkout" element={<Checkout/>} />
               <Route path="/payment/:tn" element={<Payment/>}/>
               <Route path="/profile" element={<Profile/>} />
