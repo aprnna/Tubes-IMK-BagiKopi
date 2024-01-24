@@ -19,22 +19,22 @@ export default function Home() {
   }
   return (
     <section className='bg-white'>
-      <div class="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}/>
-      <div class="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
-        <p class="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
+      <div className="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}/>
+      <div className="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
+        <p className="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
       </div>
-      <div class="flex gap-2 mx-2">
-        <Link to='/product-list' class="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
+      <div className="flex gap-2 mx-2">
+        <Link to='/product-list' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
           <FontAwesomeIcon icon={faGlassWater}/>
-          <p class="font-medium text-xl">Pickup</p>
+          <p className="font-medium text-xl">Pickup</p>
         </Link>
-        <Link to='/history-transactions' class="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
+        <Link to='/history-transactions' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
           <FontAwesomeIcon icon={faFileLines}/>
-          <p class="font-medium text-xl">Pesanan</p>
+          <p className="font-medium text-xl">Pesanan</p>
         </Link>
       </div>
-      <div class="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture1}></div>
-      <div class="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture2}></div>
+      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture1}></div>
+      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture2}></div>
     </section>
   )
 }
