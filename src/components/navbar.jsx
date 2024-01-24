@@ -5,7 +5,7 @@ import { faHouse,faGlassWater,faFile,faUser } from '@fortawesome/free-solid-svg-
 
 export default function Navbar() {
   return (
-    <nav className='bg-white flex z-10 bottom-0 sticky justify-between px-4 text-center pt-2'>
+    <nav className='bg-white flex z-10 bottom-0 sticky justify-between px-4 text-center pt-3'>
       <NavLink to='/' className={({ isActive }) => isActive ? "text-accent3" : ""}>
         <FontAwesomeIcon icon={faHouse} size='xl' />
         <p>Home</p>

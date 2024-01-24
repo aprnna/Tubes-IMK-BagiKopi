@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/auth-context"
 
 export default function DetailProfile() {
     const user = useAuth()
-    console.log(user)
     async function handleLogout(e) {
         e.preventDefault()
         const { error } = await supabase.auth.signOut()
