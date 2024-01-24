@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../lib/api'
 import { useAuth } from '../contexts/auth-context'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default function Profile() {
   const user = useAuth()
   const [updateUser, setUpdateUser] = useState({
     email: user.email,
     name: '',
-    age: '',
+    phone: '',
   })
   async function getUser() {
     const { data, error } = await supabase
@@ -19,7 +22,7 @@ export default function Profile() {
     setUpdateUser({
       ...updateUser,
       name: data.name,
-      age: data.age,
+      phone: data.phone,
     })
   }
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function Profile() {
       .from('users')
       .update({
         name: updateUser.name,
-        age: updateUser.age,
+        phone: updateUser.phone,
       })
       .eq('id', user.id)
     if (error) return alert(error.message)
@@ -52,28 +55,30 @@ export default function Profile() {
   }
   return (
     <section className='space-y-4'>
-      <div class="w-full h-16 bg-[#006eb9] relative top-3">
-        <button>
-          <img src='\images\backarrow.png' alt='back' width="40" class="absolute top-3 left-3" />
-        </button>
-        <p class="text-2xl top-3.5 left-40 text-[#FFFFFF] absolute">Profile Saya</p>
+      <div class="w-full bg-[#006eb9] text-center py-4">
+        <Link to='/profile'>
+          <FontAwesomeIcon icon={faArrowLeft} size='lg' className='text-white absolute left-5' />
+        </Link>
+        <p class="text-xl text-white">Profile Saya</p>
       </div>
       <div class="w-full h-auto relative">
         <div class="h-28 rounded-full relative w-28 bg-cover top-9 left-40" style={bgPicture2}>
-          <button>
+          {/* <button>
             <img src='\images\gallery.png' alt='edit' width="20" class="absolute bottom-2 right-2" />
-          </button>
+          </button> */}
         </div>
         <div class="w-full h-96 mt-14 relative">
           <form onSubmit={handleUpdateProfile} className='relative'>
             <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Nama</p>
             <input name='name' type='text' placeholder='Name' value={updateUser.name} onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Alamat</p>
-            <input name='age' type='text' placeholder='Alamat' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Jenis Kelamin</p>
-            <input name='name' type='text' placeholder='Jenis Kelamin' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Tanggal Lahir</p>
-            <input name='age' type='date' placeholder='Tanggal Lahir' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
+            <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Email</p>
+            <input name='email' type='email' placeholder='Email' value={updateUser.email} disabled onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
+            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Alamat</p> */}
+            {/* <input name='age' type='text' placeholder='Alamat' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
+            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Jenis Kelamin</p> */}
+            {/* <input name='name' type='text' placeholder='Jenis Kelamin' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
+            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Tanggal Lahir</p> */}
+            {/* <input name='age' type='date' placeholder='Tanggal Lahir' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
             <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Nomor Handphone</p>
             <input name='name' type='text' placeholder='Nomor Handphone' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
             <button className='ml-7 mt-7 w-96 h-12 bg-[#4171b9] rounded-lg text-white font-semibold text-lg'>Simpan</button>
