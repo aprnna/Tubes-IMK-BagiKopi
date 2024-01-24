@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { supabase } from "../lib/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logobagi from '../assets/logo1.jpg';
 
 export default function Register() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
     fullName: '',
     phoneNumber: '',
+    password: '',
     confirmPassword: '',
   });
 
   async function handleRegister(e) {
     e.preventDefault();
+    if (!formData.email || !formData.fullName || !formData.phoneNumber || !formData.password || !formData.confirmPassword) return alert('Mohon isi semua data');
+    if (formData.password !== formData.confirmPassword) return alert('Password tidak sama');
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -25,10 +28,10 @@ export default function Register() {
       .from('users')
       .update({
         name: formData.fullName,
-        phoneNumber: formData.phoneNumber,
+        phone: formData.phoneNumber,
       })
       .eq('id', data.user.id)
-      .then(() => alert('Profile updated!'))
+      .then(() => navigate('/login'))
       .catch(error => alert(error.message));
   }
 
@@ -40,29 +43,22 @@ export default function Register() {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center p-10">
-      <div
-        className="rounded-t-md overflow-hidden"
-        style={{ backgroundColor: '#0077f9', width: '100%', maxHeight: '50%', position: 'relative' }}
-      >
+    <div className="h-screen flex flex-col justify-center items-center  bg-[#0077f9]">
+      <div className="rounded-t-md overflow-hidden w-full h-full flex justify-center items-center">
         <img
           src={logobagi}
           alt="logobagi"
-          className="w-full h-full object-cover"
-          style={{ backgroundColor: '#0077f9' }}
+          className=" object-cover h-4/5"
         />
       </div>
-
-      <section
-        className="bg-white rounded-b-md shadow-md p-10 w-full max-w-md"
-      >
+      <section className="bg-white rounded-b-md shadow-md p-10 w-full max-w-md rounded-t-3xl">
         <h1 className="font-bold text-xl text-center mb-4">Register</h1>
         <form onSubmit={handleRegister} className="flex flex-col space-y-3">
-          <input name="email" type="text" placeholder="Email" className="input-text" onChange={handleChange} />
-          <input name="fullName" type="text" placeholder="Full Name" className="input-text" onChange={handleChange} />
-          <input name="phoneNumber" type="tel" placeholder="Phone Number" className="input-text" onChange={handleChange} />
-          <input name="password" type="password" placeholder="Password" className="input-text" onChange={handleChange} />
-          <input name="confirmPassword" type="password" placeholder="Confirm Password" className="input-text" onChange={handleChange} />
+          <input name="email" type="text" placeholder="Email" className="input-text" onChange={handleChange} required/>
+          <input name="fullName" type="text" placeholder="Full Name" className="input-text" onChange={handleChange} required/>
+          <input name="phoneNumber" type="text" inputmode="numeric" pattern="\d*" placeholder="Phone Number" className="input-text" onChange={handleChange} required/>
+          <input name="password" type="password" placeholder="Password" className="input-text" onChange={handleChange} required/>
+          <input name="confirmPassword" type="password" placeholder="Confirm Password" className="input-text" onChange={handleChange} required/>
           <button type="submit" className="btn-primary">Register</button>
         </form>
         <p className="mt-4">Sudah Memiliki Account? <Link to="/login" className="font-bold">Log in</Link></p>

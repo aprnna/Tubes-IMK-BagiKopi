@@ -66,7 +66,7 @@ export default function DetailProduct() {
   }
   return (
     <>
-      <section className='min-h-[90vh]'>
+      <section className='min-h-[85vh]'>
         <section className='h-[200px] bg-gray-300 relative'>
           <Link to={'/product-list'} className='absolute left-3 top-2'><FontAwesomeIcon icon={faCircleArrowLeft} size='lg'/></Link>
           <img src={img_link} alt="img-product" className='h-full mx-auto'/>

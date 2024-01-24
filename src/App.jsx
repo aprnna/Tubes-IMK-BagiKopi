@@ -12,6 +12,7 @@ import DetailProduct from "./pages/detailProduct";
 import Checkout from "./pages/checkout";
 import { Payment } from "./pages/payment";
 import HistoryTransaction from "./pages/historyTransaction";
+import Layout from "./layouts/layout";
 
 
 function App() {
@@ -20,18 +21,22 @@ function App() {
       <AuthContextProvider>
         <Routes>
           <Route path="/" element={<LayoutMobile />}>
-            <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />     
-            <Route path="/product-list" element={<Menu />} />
+            <Route element={<Layout/>}>
+              <Route index element={<Home />} />
+              <Route path="/product-list" element={<Menu />} />
+              <Route element={<ProtectedRoute/>}>
+                <Route path="/profile" element={<DetailProfile />} />
+                <Route path="/checkout" element={<Checkout/>} />
+                <Route path="/profile" element={<Profile/>} />
+                <Route path="/history-transaction" element={<HistoryTransaction/>}/>
+              </Route>
+            </Route>  
             <Route path="/product-list/:id" element={<DetailProduct />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />   
             <Route element={<ProtectedRoute/>}>
-              <Route path="/detailProfile" element={<DetailProfile />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/checkout" element={<Checkout/>} />
+              <Route path="/profile-edit" element={<Profile />} />
               <Route path="/payment/:tn" element={<Payment/>}/>
-              <Route path="/profile" element={<Profile/>} />
-              <Route path="/history-transaction" element={<HistoryTransaction/>}/>
             </Route>
           </Route>
           <Route path="*" element={<h1>404 Not Found</h1>} />

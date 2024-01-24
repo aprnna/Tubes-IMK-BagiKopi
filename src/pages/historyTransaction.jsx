@@ -12,22 +12,16 @@ export default function HistoryTransaction() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   useEffect(()=>{
-    async function getTransactions() {
-      const { data } = await supabase.from('transactions').select().eq('id_user', user?.id);
-      setTransactions(data)
-    }
-    async function getDetailTransaction() {
-      const { data } = await supabase.from('orders').select().eq('id_user', user?.id);
-      setDetailTransaction(data)
-    }
-    async function getProducts() {
-      const { data } = await supabase.from("products").select();
-      setProducts(data)
+    async function getData() {
+      const { data:transactionData } = await supabase.from('transactions').select().eq('id_user', user?.id);
+      setTransactions(transactionData)
+      const { data:detailTransactionData } = await supabase.from('orders').select().eq('id_user', user?.id);
+      setDetailTransaction(detailTransactionData )
+      const { data:productsData } = await supabase.from("products").select();
+      setProducts(productsData)
       setLoading(false)
     }
-    getDetailTransaction()
-    getTransactions()
-    getProducts()
+    getData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
@@ -37,7 +31,7 @@ export default function HistoryTransaction() {
         <h1 className='font-bold text-center'>Pesanan Saya</h1>  
       </header>
       <section>
-        {!loading && transactions.map((transaction) => {
+        {!loading && transactions?.map((transaction) => {
           const detail = detailTransaction.filter((detail) => detail.id_transaction === transaction.id)
           return (
             <div key={transaction.id} className='bg-white p-4'>

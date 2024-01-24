@@ -22,7 +22,7 @@ export function AuthContextProvider({children}){
         id: user?.id,
         email: user?.email,
         name: data?.name,
-        age: data?.age,
+        phone: data?.phone,
         role: data?.role,
         signIn: true,
       })
