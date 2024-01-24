@@ -16,7 +16,8 @@ export default function Login() {
       password: password
     }).finally(()=> setLoading(false));
     if (error) return alert(error.message);
-    return navigate('/');
+    navigate('/');
+    window.location.reload();
   }
 
   return (
