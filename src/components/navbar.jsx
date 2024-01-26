@@ -4,24 +4,39 @@ import { NavLink } from 'react-router-dom'
 import { faHouse,faGlassWater,faFile,faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar() {
+ 
+  const userNav = [
+    {
+      name:'Home',
+      link:'/',
+      icon:faHouse
+    },
+    {
+      name:'Menu',
+      link:'/product-list',
+      icon:faGlassWater
+    },
+    {
+      name:'Pesanan',
+      link:'/history-transaction',
+      icon:faFile
+    },
+    {
+      name:'Saya',
+      link:'/profile',
+      icon:faUser
+    }
+  ]
+
   return (
     <nav className='bg-white flex z-10 bottom-0 sticky justify-between px-4 text-center pt-3'>
-      <NavLink to='/' className={({ isActive }) => isActive ? "text-accent3" : ""}>
-        <FontAwesomeIcon icon={faHouse} size='xl' />
-        <p>Home</p>
-      </NavLink>
-      <NavLink to='/product-list' className={({ isActive }) => isActive ? "text-accent3" : ""}>
-        <FontAwesomeIcon icon={faGlassWater} size='xl' />
-        <p>Menu</p>
-      </NavLink>
-      <NavLink to='/history-transaction' className={({ isActive }) => isActive ? "text-accent3" : ""}>
-        <FontAwesomeIcon icon={faFile} size='xl' />
-        <p>Pesanan</p>
-      </NavLink>
-      <NavLink to='/profile' className={({ isActive }) => isActive ? "text-accent3" : ""}>
-        <FontAwesomeIcon icon={faUser} size='xl' />
-        <p>Saya</p>
-      </NavLink>
+      {userNav.map((item,index)=>(
+        <NavLink to={item.link} key={index} className={({ isActive }) => isActive ? "text-accent3" : ""}>
+          <FontAwesomeIcon icon={item.icon} size='xl' />
+          <p>{item.name}</p>
+        </NavLink>
+      ))}
+
     </nav>
   )
 }

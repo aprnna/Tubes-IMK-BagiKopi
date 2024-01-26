@@ -52,7 +52,14 @@ export default function Menu() {
                 const categoryByAvailProduct = products.filter((product) => product.id_category === category.id);
                 if(categoryByAvailProduct.length === 0) return null;
                 return (
-                  <a key={category.id} href={`#${category.id}`} className={`border-2 rounded-2xl px-3 py-1 min-w-fit ${selectedCategory === category.id?"bg-accent3 text-white":""}`} onClick={()=>setSelectedCategory(category.id)}>{category.name_category}</a>
+                  <a 
+                    key={category.id} 
+                    href={`#${category.id}`} 
+                    className={`border-2 rounded-2xl px-3 py-1 min-w-fit ${selectedCategory === category.id?"bg-accent3 text-white":""}`} 
+                    onClick={()=>setSelectedCategory(category.id)}
+                  >
+                    {category.name}
+                  </a>
                 )
               })} 
             </div>
