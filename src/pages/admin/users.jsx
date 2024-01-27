@@ -8,7 +8,7 @@ export default function Users() {
   const [searchData, setSearchData] = useState([])
   useEffect(()=>{
     async function getUsers(){
-      const { data } = await supabase.from('users').select()
+      const { data } = await supabase.from('users').select().order('created_at',{ascending:false})
       setUsers(data)
       setLoading(false)
     }

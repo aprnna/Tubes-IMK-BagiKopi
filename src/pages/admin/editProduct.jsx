@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/api'
 
 export default function EditProduct() {
@@ -7,6 +7,7 @@ export default function EditProduct() {
   const [loading, setLoading] = useState(true)
   const [categories, setCategories] = useState({})
   const [updatedProduct, setUpdatedProduct] = useState({})
+  const navigate = useNavigate()
   useEffect(()=>{
     async function getProduct(){
       const { data } = await supabase.from('products').select('name,description,id_category,price').eq('id',id).single()
@@ -53,6 +54,7 @@ export default function EditProduct() {
     }).eq('id',id)
     if (errorUpdate) return alert(error.message)
     alert('Product berhasil diupdate')
+    navigate('/admin/products')
   }
   if(loading) return <div>Loading...</div>
   return (

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../../lib/api'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateProduct() {
   const [categories, setCategories] = useState([])
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -31,6 +33,7 @@ export default function CreateProduct() {
     })
     if (productError) return alert(productError.message)
     alert('Product berhasil ditambahkan')
+    navigate('/admin/products') 
   }
 
   function handleChange(name,value){

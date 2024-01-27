@@ -13,7 +13,7 @@ export default function Products() {
   const [searchData, setSearchData] = useState([])
   useEffect(()=>{
     async function getProducts(){
-      const { data } = await supabase.from('products').select()
+      const { data } = await supabase.from('products').select().order('created_at',{ascending:false})
       setProducts(data)
     }
     async function getCategories(){
@@ -27,6 +27,12 @@ export default function Products() {
   function handleSearch(e) {
     setSearch(e.target.value);
     setSearchData(products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase())));
+  }
+  async function handleDelete(id){
+    const { error } = await supabase.from('products').delete().eq('id',id)
+    if (error) return alert(error.message)
+    alert('Product berhasil dihapus')
+    window.location.reload()
   }
   return (
     <section className='p-4'>
@@ -108,7 +114,7 @@ export default function Products() {
                     </td>
                     <td className="p-4">
                       <Link to={`edit/${product.id}`} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Edit</Link>
-                      <Link className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Delete</Link>
+                      <button onClick={()=>handleDelete(product.id)} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Delete</button>
                     </td>
                   </tr>
                 )
@@ -134,6 +140,10 @@ export default function Products() {
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                         {getDayDate(product.created_at)}
                       </p>
+                    </td>
+                    <td className="p-4">
+                      <Link to={`edit/${product.id}`} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Edit</Link>
+                      <button onClick={()=>handleDelete(product.id)} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Delete</button>
                     </td>
                   </tr>
                 )
