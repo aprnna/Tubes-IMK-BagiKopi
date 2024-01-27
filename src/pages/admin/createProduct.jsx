@@ -42,8 +42,9 @@ export default function CreateProduct() {
   return (
     <section>
       <form onSubmit={handleSubmit} className='flex flex-col max-w-96 mx-auto space-y-2'>
-        <label htmlFor="name-product">Name Product</label>
-        <input 
+        <label htmlFor="name-product">
+          <p>Name Product</p>
+          <input 
           name='name' 
           id='name-product' 
           type="text" 
@@ -52,40 +53,47 @@ export default function CreateProduct() {
           onChange={(e)=>handleChange('name',e.target.value)}
           required
         />
-        <label htmlFor="description">Deskripsi</label>
-        <textarea 
-          name="description" 
-          id="description-product" 
-          cols="30" 
-          rows="10" 
-          placeholder='Description' 
-          onChange={(e)=>handleChange('description',e.target.value)}
-          required
-        />
-        <label htmlFor="price-product">Price Product</label>
-        <input 
-          type="number" 
-          name="price" 
-          id="price-product" 
-          placeholder='Price' 
-          className='input-text'
-          onChange={(e)=>handleChange('price',e.target.value)}
-          required
-        />
-        <label htmlFor="category-product">Category Product</label>
-        <select 
-          name="category" 
-          id="category-product" 
-          onChange={(e)=>handleChange('id_category',e.target.value)}
-          required
-        >
-          <option value="">Select Category</option>
-          {categories.map((category)=>{
-            return (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            )
-          })}
-        </select>
+        </label>
+        <label htmlFor="description">
+          <p>Deskripsi</p>
+          <textarea 
+            name="description" 
+            id="description-product" 
+            cols="30" 
+            rows="10" 
+            placeholder='Description' 
+            onChange={(e)=>handleChange('description',e.target.value)}
+            required
+          />
+        </label>
+        <label htmlFor="price-product">
+          <p>Price Product</p>
+          <input 
+            type="number" 
+            name="price" 
+            id="price-product" 
+            placeholder='Price' 
+            className='input-text'
+            onChange={(e)=>handleChange('price',e.target.value)}
+            required
+          />
+        </label>
+        <label htmlFor="category-product">
+          <p>Category Product</p>
+          <select 
+            name="category" 
+            id="category-product" 
+            onChange={(e)=>handleChange('id_category',e.target.value)}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((category)=>{
+              return (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              )
+            })}
+          </select>
+        </label>
         <label htmlFor="img-product">Image Product</label>
         <input 
           type="file" 
