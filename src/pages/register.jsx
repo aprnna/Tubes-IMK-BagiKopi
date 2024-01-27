@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../lib/api";
 import { Link, useNavigate } from "react-router-dom";
-import logobagi from '../assets/logo1.jpg';
 
 export default function Register() {
   const navigate = useNavigate()
@@ -29,6 +28,7 @@ export default function Register() {
       .update({
         name: formData.fullName,
         phone: formData.phoneNumber,
+        email: formData.email,
       })
       .eq('id', data.user.id)
       .then(() => navigate('/login'))
@@ -46,7 +46,7 @@ export default function Register() {
     <div className="h-screen flex flex-col justify-center items-center  bg-[#0077f9]">
       <div className="rounded-t-md overflow-hidden w-full h-full flex justify-center items-center">
         <img
-          src={logobagi}
+          src='/assets/logo1.jpg'
           alt="logobagi"
           className=" object-cover h-4/5"
         />

@@ -73,7 +73,7 @@ export default function Checkout() {
           </div>
         </section>
       </section>
-      <section className='sticky bottom-0'>
+      <section className='sticky bottom-14'>
         <div className='bg-white p-4 px-8 flex justify-between items-center'>
           <h1 className='font-bold text-lg'>Rp. {totalPrice}</h1>
           <button className='btn-primary' onClick={()=>handleCheckout()}>Pilih Pembayaran</button>

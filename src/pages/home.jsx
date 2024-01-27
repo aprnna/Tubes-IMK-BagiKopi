@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from '../contexts/auth-context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGlassWater, faFileLines } from '@fortawesome/free-solid-svg-icons'
+import { faMugSaucer, faFileLines } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 export default function Home() {
   const user = useAuth()
@@ -23,13 +23,13 @@ export default function Home() {
       <div className="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
         <p className="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
       </div>
-      <div className="flex gap-2 mx-2">
+      <div className="flex gap-2 mx-2 h-28">
         <Link to='/product-list' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
-          <FontAwesomeIcon icon={faGlassWater}/>
+          <FontAwesomeIcon icon={faMugSaucer} size='xl'/>
           <p className="font-medium text-xl">Pickup</p>
         </Link>
         <Link to='/history-transactions' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
-          <FontAwesomeIcon icon={faFileLines}/>
+          <FontAwesomeIcon icon={faFileLines} size='xl'/>
           <p className="font-medium text-xl">Pesanan</p>
         </Link>
       </div>

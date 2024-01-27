@@ -13,13 +13,31 @@ import Checkout from "./pages/checkout";
 import { Payment } from "./pages/payment";
 import HistoryTransaction from "./pages/historyTransaction";
 import Layout from "./layouts/layout";
-
+import LoginAdmin from "./pages/admin/login";
+import Dashboard from "./pages/admin/dashboard";
+import LayoutDesktop from "./layouts/layoutDesktop";
+import Products from "./pages/admin/products";
+import CreateProduct from "./pages/admin/createProduct";
+import Users from "./pages/admin/users";
+import EditProduct from "./pages/admin/editProduct";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
         <Routes>
+          {/* ADMIN */}
+          <Route path="/admin" element={<LayoutDesktop/>}>
+            <Route index element={<LoginAdmin/>}/>
+            <Route path="dashboard" element={<Dashboard/>}/>
+            <Route path="users" element={<Users/>}/>
+            <Route path="products" >
+              <Route index element={<Products/>}/>
+              <Route path="create" element={<CreateProduct/>}/>
+              <Route path="edit/:id" element={<EditProduct/>}/>
+            </Route>
+          </Route>
+          {/* USER */}
           <Route path="/" element={<LayoutMobile />}>
             <Route element={<Layout/>}>
               <Route index element={<Home />} />

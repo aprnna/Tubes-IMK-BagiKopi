@@ -73,12 +73,6 @@ export default function Profile() {
             <input name='name' type='text' placeholder='Name' value={updateUser.name} onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
             <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Email</p>
             <input name='email' type='email' placeholder='Email' value={updateUser.email} disabled onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Alamat</p> */}
-            {/* <input name='age' type='text' placeholder='Alamat' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
-            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Jenis Kelamin</p> */}
-            {/* <input name='name' type='text' placeholder='Jenis Kelamin' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
-            {/* <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Tanggal Lahir</p> */}
-            {/* <input name='age' type='date' placeholder='Tanggal Lahir' onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' /> */}
             <p class="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Nomor Handphone</p>
             <input name='phone' type='text' placeholder='Nomor Handphone' value={updateUser.phone} inputMode='numeric' pattern="\d*" onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
             <button className='ml-7 mt-7 w-96 h-12 bg-[#4171b9] rounded-lg text-white font-semibold text-lg'>Simpan</button>
