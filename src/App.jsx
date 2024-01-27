@@ -19,6 +19,7 @@ import LayoutDesktop from "./layouts/layoutDesktop";
 import Products from "./pages/admin/products";
 import CreateProduct from "./pages/admin/createProduct";
 import Users from "./pages/admin/users";
+import EditProduct from "./pages/admin/editProduct";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="products" >
               <Route index element={<Products/>}/>
               <Route path="create" element={<CreateProduct/>}/>
+              <Route path="edit/:id" element={<EditProduct/>}/>
             </Route>
           </Route>
           {/* USER */}

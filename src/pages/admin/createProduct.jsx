@@ -19,8 +19,7 @@ export default function CreateProduct() {
   },[])
   async function handleSubmit(e){
     e.preventDefault()
-    console.log(formData)
-    const { data:uploadfile, error } = await supabase.storage.from('product').upload(`test/${formData.name}`, formData.img)
+    const { data:uploadfile, error } = await supabase.storage.from('product').upload(`upload/${formData.name}`, formData.img)
     if (error) return alert(error.message)
     const { data } = await supabase.storage.from('product').getPublicUrl(`${uploadfile.path}`)
     const {error:productError} = await supabase.from('products').insert({
@@ -53,7 +52,7 @@ export default function CreateProduct() {
           onChange={(e)=>handleChange('name',e.target.value)}
           required
         />
-        <label htmlFor="description">Name Product</label>
+        <label htmlFor="description">Deskripsi</label>
         <textarea 
           name="description" 
           id="description-product" 
