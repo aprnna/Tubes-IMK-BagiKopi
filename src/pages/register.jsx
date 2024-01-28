@@ -61,7 +61,7 @@ export default function Register() {
           <input name="confirmPassword" type="password" placeholder="Confirm Password" className="input-text" onChange={handleChange} required/>
           <button type="submit" className="btn-primary">Register</button>
         </form>
-        <p className="mt-4">Sudah Memiliki Account? <Link to="/login" className="font-bold">Log in</Link></p>
+        <p className="mt-4">Sudah Memiliki Account? <Link to="/login" className="font-bold text-accent3">Login disini</Link></p>
       </section>
     </div>
   );

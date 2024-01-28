@@ -45,7 +45,7 @@ export default function Login() {
         </form>
         <p className="mt-4 text-center">
           Sudah memiliki akun?{' '}
-          <Link to="/register" className='font-bold'>
+          <Link to="/register" className='font-bold text-accent3'>
             Register Disini
           </Link>
         </p>

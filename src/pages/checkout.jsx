@@ -40,11 +40,11 @@ export default function Checkout() {
       <section className='min-h-[90vh] bg-gray-100 space-y-4'>
         <header className='p-4 relative bg-accent3 text-white shadow-md'>
           <Link to='/product-list' className='absolute '><FontAwesomeIcon icon={faArrowLeft} size='lg'/></Link>
-          <h1 className='font-bold text-center'>Pickup</h1>  
+          <h1 className='font-bold text-center'>Detail Pesanan</h1>  
         </header>
         <section className='bg-white p-4 space-y-2'>
-          <h1 className='font-bold text-lg'>Informasi Pesanan</h1>
-          <input type="text" className='input-text text-sm' placeholder='No Bangku' onChange={(e)=>setTableNumber(e.target.value)}/>
+          <h1 className='font-bold text-lg'>Pesanan anda akan diantar ke</h1>
+          <input type="number" className='input-text text-sm w-full' placeholder='Masukan nomor meja anda' onChange={(e)=>setTableNumber(e.target.value)}/>
         </section>
         <section className='bg-white p-4 space-y-4'>
           <div className='flex justify-between'>
@@ -73,7 +73,7 @@ export default function Checkout() {
           </div>
         </section>
       </section>
-      <section className='sticky bottom-14'>
+      <section className='sticky bottom-0'>
         <div className='bg-white p-4 px-8 flex justify-between items-center'>
           <h1 className='font-bold text-lg'>Rp. {totalPrice}</h1>
           <button className='btn-primary' onClick={()=>handleCheckout()}>Pilih Pembayaran</button>
