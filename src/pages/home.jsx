@@ -28,7 +28,7 @@ export default function Home() {
           <FontAwesomeIcon icon={faMugSaucer} size='xl'/>
           <p className="font-medium text-xl">Pickup</p>
         </Link>
-        <Link to='/history-transactions' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
+        <Link to='/history-transaction' className="border bg-white rounded-xl shadow-lg p-5 flex justify-center items-center gap-4 flex-1">
           <FontAwesomeIcon icon={faFileLines} size='xl'/>
           <p className="font-medium text-xl">Pesanan</p>
         </Link>

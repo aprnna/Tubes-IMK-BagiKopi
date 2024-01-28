@@ -44,7 +44,6 @@ function App() {
               <Route path="/product-list" element={<Menu />} />
               <Route element={<ProtectedRoute/>}>
                 <Route path="/profile" element={<DetailProfile />} />
-                <Route path="/checkout" element={<Checkout/>} />
                 <Route path="/profile" element={<Profile/>} />
                 <Route path="/history-transaction" element={<HistoryTransaction/>}/>
               </Route>
@@ -53,6 +52,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />   
             <Route element={<ProtectedRoute/>}>
+              <Route path="/checkout" element={<Checkout/>} />
               <Route path="/profile-edit" element={<Profile />} />
               <Route path="/payment/:tn" element={<Payment/>}/>
             </Route>
