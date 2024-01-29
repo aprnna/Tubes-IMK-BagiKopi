@@ -18,7 +18,6 @@ export default function ProtectedRoute({children}) {
 
     return () => subscription.unsubscribe()
   }, [])
-  console.log(session)
   if (!session) {
     return !loading && <Navigate to="/login" />
   }
