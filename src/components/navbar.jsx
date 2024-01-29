@@ -22,7 +22,7 @@ export default function Navbar() {
       icon:faFile
     },
     {
-      name:'Saya',
+      name:'Profile',
       link:'/profile',
       icon:faUser
     }
