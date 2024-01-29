@@ -20,11 +20,13 @@ export function Payment() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-  async function handlePayment(){
+  async function handlePayment(e, canceled = false){
+    e.preventDefault()
+    if (!selectedMethod) return alert('Pilih metode pembayaran')
     const { data, error:error1 } = await supabase.from('transactions').insert(
       { 
         id_user: user.id,
-        status: 'success',
+        status: canceled?'canceled':'success',
         total: totalPrice, 
         method: selectedMethod,
         table_number: tn
@@ -33,12 +35,12 @@ export function Payment() {
     if(error1) return alert(error1.message)
     const { error:error2 } = await supabase.from('orders').update({ id_transaction:data.id,oncart: false }).eq('id_user', user.id).eq('oncart', true)
     if(error2) return alert(error2.message)
-    alert('Berhasil melakukan pembayaran')
-    navigate('/product-list')
+    alert(`Berhasil ${canceled?'membatalkan':'melakukan'} pembayaran`)
+    navigate('/history-transaction')
   }
   return (
     <>
-      <section className="min-h-screen">
+      <section className="min-h-[90vh]">
         <header className="text-center p-4">
           <h4 className="text-lg font-bold py-4">Pembayaran</h4>
           <h1 className="text-2xl font-bold">Rp. {totalPrice}</h1>
@@ -57,8 +59,9 @@ export function Payment() {
           })}
         </section>
       </section>
-      <section className="sticky bottom-0 p-4">
-        <button onClick={handlePayment} className="w-full bg-blue-500 text-white py-3">Bayar</button>
+      <section className="sticky bottom-0 p-4 flex gap-2">
+        <button onClick={(e)=>handlePayment(e,true)} className="w-full py-3">Cancel</button>
+        <button onClick={(e)=>handlePayment(e)} className="w-full bg-accent3 text-white py-3">Bayar</button>
       </section>
     </>
     
