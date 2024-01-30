@@ -15,7 +15,7 @@ export default function LoginAdmin() {
       email: email,
       password: password
     }).finally(()=> setLoading(false));
-    if (error) return alert(error.message);
+    if (error) return alert('Email atau password salah');
     const { data:userData } = await supabase.from('users').select().eq('id', data.user.id).single();
     console.log(userData);
     if (userData.role !== 'admin'){
@@ -27,29 +27,32 @@ export default function LoginAdmin() {
   }
 
   return (
-    <section className='h-screen flex justify-center items-center gap-5 flex-col md:flex-row space-y-4 px-2 bg-[#0077f9]'>
-      <div className='flex justify-center items-center h-1/2 bg-[#0077f9]'>
-        <img src='/assets/logo1.jpg' alt="logobagi" className="w-full h-full object-cover" />
+    <section className='h-screen w-screen grid grid-cols-1 md:grid-cols-2 '>
+      <div className=' bg-background order-2 flex justify-center items-center'>
+        <img src='/assets/logo1.png' alt="logobagi" className="justify-self-center h-[40%]" />
       </div>
-      <section className='bg-white rounded-md shadow-md py-10 px-5 w-full max-w-md'>
-        <h1 className='font-bold text-xl text-center mb-4'>Login</h1>
-        <form onSubmit={handleLogin} className='flex flex-col space-y-3'>
-          <input
-            type="text"
-            placeholder='Email'
-            className="input-text"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder='Password'
-            className="input-text"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className='btn-primary'>
-            {loading ? 'Loading..' : 'Login'}
-          </button>
-        </form>
+      <section className='bg-white rounded-md shadow-md py-10 px-5 w-full order-1 flex items-center justify-center'>
+        <div className='w-full max-w-md space-y-3'>
+          <img src="/assets/MiniLogo2.png" alt="logo" className='h-[40px]'/>
+          <h1 className='font-bold text-2xl'>Selamat Datang di Bagi Kopi</h1>
+          <form onSubmit={handleLogin} className='flex flex-col space-y-3'>
+            <input
+              type="text"
+              placeholder='Email'
+              className="input-text"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder='Password'
+              className="input-text"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="submit" className='btn-primary'>
+              {loading ? 'Loading..' : 'Login'}
+            </button>
+          </form>
+        </div>
       </section>
     </section>
   );

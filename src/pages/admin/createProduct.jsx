@@ -43,8 +43,11 @@ export default function CreateProduct() {
     })
   }
   return (
-    <section>
-      <form onSubmit={handleSubmit} className='flex flex-col max-w-96 mx-auto space-y-2'>
+    <section className='p-5 space-y-5'>
+      <section>
+        <h1 className='text-xl font-bold'>Buat Produk</h1>
+      </section>
+      <form onSubmit={handleSubmit} className='flex flex-col max-w-96 space-y-4'>
         <label htmlFor="name-product">
           <p>Name Product</p>
           <input 
@@ -65,6 +68,7 @@ export default function CreateProduct() {
             cols="30" 
             rows="10" 
             placeholder='Description' 
+            className='input-text'
             onChange={(e)=>handleChange('description',e.target.value)}
             required
           />
@@ -86,6 +90,7 @@ export default function CreateProduct() {
           <select 
             name="category" 
             id="category-product" 
+            className='input-text'
             onChange={(e)=>handleChange('id_category',e.target.value)}
             required
           >
@@ -97,15 +102,18 @@ export default function CreateProduct() {
             })}
           </select>
         </label>
-        <label htmlFor="img-product">Image Product</label>
-        <input 
-          type="file" 
-          name="img" 
-          id="img-product" 
-          onChange={(e)=>handleChange('img',e.target.files[0])}
-          required
-        /> 
-        <button className='btn-primary'>Submit</button>
+        <label htmlFor="img-product">
+          <p>Image Product</p>
+          <input 
+            type="file" 
+            name="img" 
+            id="img-product" 
+            className='input-text'
+            onChange={(e)=>handleChange('img',e.target.files[0])}
+            required
+          /> 
+        </label>
+        <button className='btn-primary w-fit'>Submit</button>
       </form>
     </section>
   )

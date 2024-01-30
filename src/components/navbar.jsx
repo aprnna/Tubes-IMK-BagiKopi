@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 import { faHouse,faGlassWater,faFile,faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar() {
- 
   const userNav = [
     {
       name:'Home',

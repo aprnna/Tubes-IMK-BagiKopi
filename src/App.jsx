@@ -20,6 +20,8 @@ import Products from "./pages/admin/products";
 import CreateProduct from "./pages/admin/createProduct";
 import Users from "./pages/admin/users";
 import EditProduct from "./pages/admin/editProduct";
+import Orders from "./pages/admin/orders";
+import LayoutAdmin from "./layouts/layourAdmin";
 
 function App() {
   return (
@@ -29,13 +31,17 @@ function App() {
           {/* ADMIN */}
           <Route path="/admin" element={<LayoutDesktop/>}>
             <Route index element={<LoginAdmin/>}/>
-            <Route path="dashboard" element={<Dashboard/>}/>
-            <Route path="users" element={<Users/>}/>
-            <Route path="products" >
-              <Route index element={<Products/>}/>
-              <Route path="create" element={<CreateProduct/>}/>
-              <Route path="edit/:id" element={<EditProduct/>}/>
+            <Route element={<LayoutAdmin/>}>
+              <Route path="dashboard" element={<Dashboard/>}/>
+              <Route path="users" element={<Users/>}/>
+              <Route path="orders" element={<Orders/>}/>
+              <Route path="products" >
+                <Route index element={<Products/>}/>
+                <Route path="create" element={<CreateProduct/>}/>
+                <Route path="edit/:id" element={<EditProduct/>}/>
+              </Route>
             </Route>
+            
           </Route>
           {/* USER */}
           <Route path="/" element={<LayoutMobile />}>
