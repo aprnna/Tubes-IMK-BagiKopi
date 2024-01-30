@@ -34,52 +34,30 @@ export default function Products() {
     alert('Product berhasil dihapus')
     window.location.reload()
   }
+
+
+  const columns = ['Name', 'Category', 'Deskripsi', 'Harga', 'Dibuat', 'Action']
   return (
-    <section className='p-4'>
+    <section className='p-4 space-y-3'>
       <section>
-        <h1>List Product</h1>
+        <h1 className='font-bold text-2xl'>List Produk</h1>
       </section>
-      <section className='flex items-center justify-between'>
-        <input type="text" placeholder='Search name produk' className='input-text' onChange={handleSearch}/>
-        <div>
-          <Link className='btn-primary' to='create'>Tambah Product</Link>
-        </div>
+      <section className='flex items-center justify-end gap-2'>
+        <input type="text" placeholder='Search name produk' className='input-text text-sm' onChange={handleSearch}/>
+        <Link className='btn-primary text-sm' to='create'>Tambah Product</Link>
       </section>
       <section className='p-4'>
         <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">
           <table className="w-full text-left table-auto min-w-max">
-            <thead>
+            <thead className=' '>
               <tr>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Name
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Category
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Deskripsi
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Harga
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Dibuat
-                  </p>
-                </th>
-                <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                  <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                    Action
-                  </p>
-                </th>
+                {columns.map((column,index)=>(
+                  <th key={index} className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                    <p className="block font-sans text-sm antialiased font-bold leading-none text-blue-gray-900 ">
+                      {column}
+                    </p>
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -87,12 +65,12 @@ export default function Products() {
                 const category = categories.find((category) => category.id === product.id_category)
                 return (
                   <tr key={product.id} className="even:bg-gray-100">
-                    <td className="p-4">
+                    <td className="p-4 max-w-md">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                         {product.name}
                       </p>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4 ">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                         {category?.name}
                       </p>
@@ -113,17 +91,23 @@ export default function Products() {
                       </p>
                     </td>
                     <td className="p-4">
-                      <Link to={`edit/${product.id}`} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Edit</Link>
-                      <button onClick={()=>handleDelete(product.id)} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">Delete</button>
+                      <Link to={`edit/${product.id}`} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 text-accent1 underline">Edit</Link>
+                      <button onClick={()=>handleDelete(product.id)} className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 text-accent4 underline">Delete</button>
                     </td>
                   </tr>
                 )
               }):searchData?.map((product) => {
+                const category = categories.find((category) => category.id === product.id_category)
                 return (
                   <tr key={product.id} className="even:bg-gray-100">
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                         {product.name}
+                      </p>
+                    </td>
+                    <td className="p-4 ">
+                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                        {category?.name}
                       </p>
                     </td>
                     <td className="p-4 max-w-md">

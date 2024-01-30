@@ -1,24 +1,27 @@
 import React, { useState,useEffect } from 'react'
 import { getDayDate } from '../../utils/processDate'
 import { supabase } from '../../lib/api'
-export default function Users() {
-  const [users, setUsers] = useState([])
+import formatRupiah from '../../utils/formatRupiah'
+
+export default function Orders() {
+  const [transactions, setTransactions] = useState([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [searchData, setSearchData] = useState([])
   useEffect(()=>{
-    async function getUsers(){
-      const { data } = await supabase.from('users').select().order('created_at',{ascending:false})
-      setUsers(data)
+    async function getTransactions(){
+      const { data } = await supabase.from('transactions').select('*,users(name)').order('created_at',{ascending:false})
+      setTransactions(data)
       setLoading(false)
     }
-    getUsers()
+    getTransactions()
   },[])
   function handleSearch(e) {
     setSearch(e.target.value);
-    setSearchData(users.filter((product) => product.name.toLowerCase().includes(search.toLowerCase())));
+    setSearchData(transactions.filter((transaction) => transaction.users.name.toLowerCase().includes(search.toLowerCase())));
+    console.log(searchData)
   }
-  const columns = ['Name', 'Email', 'Phone', 'Terdaftar']
+  const columns = ['OrderID', 'Tanggal', 'Nama Pembeli', 'Total Pembelian','Status']
   return (
     <section className='p-4 space-y-5'>
       <section>
@@ -42,52 +45,70 @@ export default function Users() {
               </tr>
             </thead>
             <tbody>
-              {!loading && (search === ''? users?.map((user) => {
+              {!loading && (search === ''? transactions?.map((transaction) => {
+                let isCanceled = false
+                if (transaction.status ==='canceled') {
+                  isCanceled = true
+                }
                 return (
-                  <tr key={user.id} className="even:bg-gray-100">
+                  <tr key={transaction.id} className="even:bg-gray-100">
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.name}
+                        # {transaction.id}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.email}
+                        {getDayDate(transaction.created_at)}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.phone}
+                        {transaction.users.name}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {getDayDate(user.created_at)}
+                        {formatRupiah(transaction.total)}
+                      </p>
+                    </td>
+                    <td className="p-4">
+                      <p className={`block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 p-2 px-4 w-fit rounded-md ${isCanceled?'bg-red-300':'bg-green-300'}`}>
+                        {isCanceled ? 'Pesanan Gagal':'Pesanan Berhasil'}
                       </p>
                     </td>
                   </tr>
                 )
-              }):searchData?.map((user) => {
+              }):searchData?.map((transaction) => {
+                let isCanceled = false
+                if (transaction.status ==='canceled') {
+                  isCanceled = true
+                }
                 return (
-                  <tr key={user.id} className="even:bg-gray-100">
+                  <tr key={transaction.id} className="even:bg-gray-100">
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.name}
+                        # {transaction.id}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.email}
+                        {getDayDate(transaction.created_at)}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {user.phone}
+                        {transaction.users.name}
                       </p>
                     </td>
                     <td className="p-4">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {getDayDate(user.created_at)}
+                        {formatRupiah(transaction.total)}
+                      </p>
+                    </td>
+                    <td className="p-4">
+                      <p className={`block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 p-2 px-4 w-fit rounded-md ${isCanceled?'bg-red-300':'bg-green-300'}`}>
+                        {isCanceled ? 'Pesanan Gagal':'Pesanan Berhasil'}
                       </p>
                     </td>
                   </tr>
@@ -97,7 +118,6 @@ export default function Users() {
           </table>
         </div>
       </section>
-      
     </section>
   )
 }

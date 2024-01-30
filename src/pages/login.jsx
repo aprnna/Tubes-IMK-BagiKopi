@@ -14,7 +14,7 @@ export default function Login() {
       email: email,
       password: password
     }).finally(()=> setLoading(false));
-    if (error) return alert(error.message);
+    if (error) return alert('Email atau password salah');
     navigate('/');
     window.location.reload();
   }

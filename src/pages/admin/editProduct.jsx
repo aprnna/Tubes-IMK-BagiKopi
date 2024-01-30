@@ -28,7 +28,7 @@ export default function EditProduct() {
       [name]: value
     })
   }
-
+  console.log(updatedProduct)
   async function handleSubmit(e){
     e.preventDefault()
     if (updatedProduct.img === undefined){
@@ -58,59 +58,75 @@ export default function EditProduct() {
   }
   if(loading) return <div>Loading...</div>
   return (
-    <section>
-      <form onSubmit={handleSubmit} className='flex flex-col max-w-96 mx-auto space-y-2'>
-        <label htmlFor="name-product">Name Product</label>
-        <input 
-          name='name' 
-          id='name-product' 
-          type="text" 
-          placeholder='Name Product' 
-          className='input-text' 
-          defaultValue={updatedProduct?.name}
-          onChange={(e)=>handleChange('name',e.target.value)}
-        />
-        <label htmlFor="description">Deskripsi</label>
-        <textarea 
-          name="description" 
-          id="description-product" 
-          cols="30" 
-          rows="10" 
-          placeholder='Description' 
-          defaultValue={updatedProduct?.description}
-          onChange={(e)=>handleChange('description',e.target.value)}
-        />
-        <label htmlFor="price-product">Price Product</label>
-        <input 
-          type="number" 
-          name="price" 
-          id="price-product" 
-          placeholder='Price'
-          defaultValue={updatedProduct?.price} 
-          className='input-text'
-          onChange={(e)=>handleChange('price',e.target.value)}
-        />
-        <label htmlFor="category-product">Category Product</label>
-        <select 
-          name="category" 
-          id="category-product" 
-          onChange={(e)=>handleChange('id_category',e.target.value)}
-          defaultValue={updatedProduct?.id_category}
-        >
-          <option value="">Select Category</option>
-          {categories.map((category)=>{
-            return (
-              <option key={category.id} value={category.id}>{category.name}</option>
-            )
-          })}
-        </select>
-        <label htmlFor="img-product">Image Product</label>
-        <input 
-          type="file" 
-          name="img" 
-          id="img-product" 
-          onChange={(e)=>handleChange('img',e.target.files[0])}
-        /> 
+    <section className='space-y-5 p-5'>
+      <section>
+        <h1 className='text-xl font-bold'>Edit Produk</h1>
+      </section>
+      <form onSubmit={handleSubmit} className='flex flex-col max-w-96 space-y-5'>
+        <label htmlFor="name-product">
+          <p>Name Product</p>
+          <input 
+            name='name' 
+            id='name-product' 
+            type="text" 
+            placeholder='Name Product' 
+            className='input-text' 
+            defaultValue={updatedProduct?.name}
+            onChange={(e)=>handleChange('name',e.target.value)}
+          />
+        </label>
+        <label htmlFor="description">
+          <p>Deskripsi</p>
+          <textarea 
+            name="description" 
+            id="description-product" 
+            cols="30" 
+            rows="10" 
+            className='input-text' 
+            placeholder='Description' 
+            defaultValue={updatedProduct?.description}
+            onChange={(e)=>handleChange('description',e.target.value)}
+          />
+        </label>
+        <label htmlFor="price-product">
+          <p>Price Product</p>
+          <input 
+            type="number" 
+            name="price" 
+            id="price-product" 
+            placeholder='Price'
+            defaultValue={updatedProduct?.price} 
+            className='input-text'
+            onChange={(e)=>handleChange('price',e.target.value)}
+          />
+        </label>
+        <label htmlFor="category-product">
+          <p>Category Product</p>
+          <select 
+            name="category" 
+            id="category-product" 
+            className='input-text' 
+            onChange={(e)=>handleChange('id_category',e.target.value)}
+            defaultValue={updatedProduct.id_category}
+          >
+            <option value="">Select Category</option>
+            {categories.map((category)=>{
+              return (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              )
+            })}
+          </select>
+        </label>
+        <label htmlFor="img-product">
+          <p>Image Product</p>
+          <input 
+            type="file" 
+            name="img" 
+            id="img-product" 
+            className='input-text' 
+            onChange={(e)=>handleChange('img',e.target.files[0])}
+          /> 
+        </label>
         <button className='btn-primary'>Update</button>
       </form>
     </section>
