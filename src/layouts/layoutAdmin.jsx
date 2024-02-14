@@ -30,7 +30,7 @@ export default function LayoutAdmin() {
     <main className='w-screen'>
       <div className='grid grid-cols-[1fr_85vw] min-h-screen'>
         <aside className='bg-background p-2 space-y-5'>
-          <img src="/assets/miniLogo.png" alt="logo" className='p-5'/>
+          <img src="/assets/MiniLogo.png" alt="logo" className='p-5'/>
           <div className='space-y-1'>
             {navItem.map((item,index)=>{
               const isActive = location.pathname.startsWith(item.path)
