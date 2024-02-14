@@ -5,6 +5,8 @@ import { faCirclePlus, faCircleMinus, faCircleArrowLeft } from '@fortawesome/fre
 import { supabase } from '../lib/api'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/auth-context'
+import Loading from '../components/Loading'
+
 export default function DetailProduct() {
   const navigate = useNavigate()
   const user = useAuth()
@@ -14,20 +16,17 @@ export default function DetailProduct() {
   const [addPrice, setAddPrice] = useState(0)
   const [subTotal, setSubTotal] = useState(0)
   const [qty, setQty] = useState(1)
+  const [loading, setLoading] = useState(true)
   const { id } = useParams()
   const { name, description, img_link, price }  = product
   useEffect(() => {
-    async function getProduct() {
-      const { data } = await supabase.from("products").select().eq('id', id).single();
-      setProduct(data);
+    async function getData() {
+      const { data:products } = await supabase.from("products").select().eq('id', id).single();
+      setProduct(products);
+      const { data:Cupsizes } = await supabase.from("product_cup_size").select().eq('id_product', id).order('id', {ascending: false});
+      setCupSize(Cupsizes);
     }
-    async function getProductCupSize () {
-      const { data } = await supabase.from("product_cup_size").select().eq('id_product', id).order('id', {ascending: false});
-      setCupSize(data);
-    }
-
-    getProductCupSize();
-    getProduct();
+    getData().then(()=>setLoading(false))
   }, [id]);
 
   useEffect(() => {
@@ -64,6 +63,7 @@ export default function DetailProduct() {
     alert('Berhasil ditambahkan ke keranjang')
     navigate('/product-list')
   }
+  if (loading) return <Loading/>
   return (
     <>
       <section className='min-h-[85vh]'>

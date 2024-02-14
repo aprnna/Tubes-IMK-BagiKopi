@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../../lib/api'
 import formatRupiah from '../../utils/formatRupiah'
-
 export default function Dashboard() {
   const [beforeDate, setBeforeDate] = useState('2024-01-30')
   const [afterDate, setAfterDate] = useState('2024-01-01')
@@ -26,6 +25,9 @@ export default function Dashboard() {
   if (loading) return <h1>Loading...</h1>
   return (
     <section className='p-5'>
+      <section>
+        
+      </section>
       <section className='flex gap-5 shadow-md w-fit p-5 rounded-lg'>
         <label htmlFor="after">
           <p>After</p>

@@ -1,7 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link, Outlet, useLocation} from 'react-router-dom'
-import { faTableColumns, faUtensils, faReceipt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { Icon } from '@iconify/react';
 
 export default function LayoutAdmin() {
   const location = useLocation();
@@ -9,22 +8,22 @@ export default function LayoutAdmin() {
     {
       name: 'Dashboard',
       path: '/admin/dashboard',
-      icon: faTableColumns
+      icon: 'ic:round-dashboard'
     },
     {
-      name: 'Produk',
+      name: 'Menu',
       path: '/admin/products',
-      icon: faUtensils
+      icon: 'mdi:food'
     },
     {
       name: 'Pesanan',
       path: '/admin/orders',
-      icon: faReceipt
+      icon: 'ph:receipt-fill'
     },
     {
       name: 'Users',
       path: '/admin/users',
-      icon: faUser
+      icon: 'iconamoon:profile-fill'
     }
   ]
   return (
@@ -36,7 +35,7 @@ export default function LayoutAdmin() {
             const isActive = location.pathname.startsWith(item.path)
             return(
             <Link key={index} to={item.path}  className={`py-2 px-5 flex items-center gap-5 hover:bg-white hover:text-accent1 font-semibold rounded-xl ${isActive ? "text-accent1 bg-white" : "text-white"}`}>
-              <FontAwesomeIcon icon={item.icon}/>
+              <Icon icon={item.icon} className='text-2xl'/>
               {item.name}
             </Link>
           )})}

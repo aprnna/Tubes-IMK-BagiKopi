@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../contexts/auth-context';
+import Loading from '../components/Loading';
 export default function Menu() {
   const user = useAuth()
   const [products, setProducts] = useState([]);
@@ -16,22 +17,15 @@ export default function Menu() {
   const [loading, setLoading] = useState(true);
   const totalPrice = cart?.reduce((total, item) => total + item.subtotal, 0);
   useEffect(() => {
-    async function getProducts() {
-      const { data } = await supabase.from("products").select().order('id_category');
-      setProducts(data);
+    async function getData() {
+      const { data:products } = await supabase.from("products").select().order('id_category');
+      setProducts(products);
+      const { data:categories } = await supabase.from("categories").select().order('id');
+      setCategories(categories);
+      const { data:cart } = await supabase.from("orders").select().eq('id_user', user?.id).eq('oncart', true);
+      setCart(cart);
     }
-    async function getCategories() {
-      const { data } = await supabase.from("categories").select().order('id');
-      setCategories(data);
-    }
-    async function getCart() {
-      const { data } = await supabase.from("orders").select().eq('id_user', user?.id).eq('oncart', true);
-      setCart(data);
-    }
-    getProducts();
-    getCategories();
-    getCart();
-    setLoading(false);
+    getData().then(()=>setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
@@ -40,7 +34,7 @@ export default function Menu() {
     setSearchData(products.filter((product) => product.name.toLowerCase().includes(search.toLowerCase())));
   }
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading/>
   return (
     <>
       <section className='min-h-[90vh]'>

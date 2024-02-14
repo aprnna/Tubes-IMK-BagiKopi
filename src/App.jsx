@@ -22,6 +22,8 @@ import Users from "./pages/admin/users";
 import EditProduct from "./pages/admin/editProduct";
 import Orders from "./pages/admin/orders";
 import LayoutAdmin from "./layouts/layourAdmin";
+import ResetPassword from "./pages/resetPassword";
+import ForgetPassword from "./pages/forgetPassword";
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
             </Route>  
             <Route path="/product-list/:id" element={<DetailProduct />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword/>}/>
+            <Route path="/forget-password" element={<ForgetPassword/>}/>
             <Route path="/register" element={<Register />} />   
             <Route element={<ProtectedRoute/>}>
               <Route path="/checkout" element={<Checkout/>} />

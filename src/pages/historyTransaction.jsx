@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/api'
 import { useAuth } from '../contexts/auth-context'
 import { getFullDate } from '../utils/processDate'
+import Loading from '../components/Loading'
 export default function HistoryTransaction() {
   const user = useAuth()
   const [transactions, setTransactions] = useState([])
@@ -19,11 +20,11 @@ export default function HistoryTransaction() {
       setDetailTransaction(detailTransactionData )
       const { data:productsData } = await supabase.from("products").select();
       setProducts(productsData)
-      setLoading(false)
     }
-    getData()
+    getData().then(()=>setLoading(false))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
+  if (loading) return <Loading/>
   return (
     <section>
       <header className='p-4 relative bg-accent3 text-white shadow-md'>
@@ -31,6 +32,9 @@ export default function HistoryTransaction() {
         <h1 className='font-bold text-center'>Pesanan Saya</h1>  
       </header>
       <section>
+        {transactions.length === 0 && 
+          <h1 className='text-center'>Belum ada transaksi</h1>
+        }
         {!loading && transactions?.map((transaction) => {
           const detail = detailTransaction.filter((detail) => detail.id_transaction === transaction.id)
           return (
