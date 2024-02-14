@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
 import { supabase } from '../lib/api'
-import { Button } from '@tremor/react'
-
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 export default function ForgetPassword() {
   const [email,setEmail] = useState('')
   const [loading,setLoading] = useState(false)
   async function handleSubmit(e){
     e.preventDefault()
     setLoading(true)
-    const { data, error } = await supabase.auth.resetPasswordForEmail(email,{
-      redirectTo: 'http://localhost:3000/reset-password'
-    }).then(()=>setLoading(false))
-    console.log(data,error)
+    await toast.promise(
+      supabase.auth.resetPasswordForEmail(email,{
+        redirectTo: 'http://localhost:3000/reset-password'
+      }),
+      { 
+        pending: 'Sedang diproses...', 
+        success: 'Berhasil. Cek email Anda.', 
+        error: 'Gagal. Coba lagi nanti.' 
+      }
+    )
+    setLoading(false)
   }
 
   return (
@@ -23,12 +30,25 @@ export default function ForgetPassword() {
           className=" object-cover h-4/5"
         />
       </div>
-      <section className="bg-white rounded-b-md shadow-md p-10 w-full max-w-md rounded-t-3xl">
-        <h1 className="font-bold text-xl text-center mb-4">Register</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-          <input name="email" type="text" placeholder="Email" className="input-text" onChange={(e)=>setEmail(e.target.value)} required/>
-          <Button type="submit" className="bg-blue-500 text-white rounded-md p-2">{loading ? 'Loading...':'Reset Password'}</Button>
-        </form>
+      <section className="bg-white rounded-b-md shadow-md p-10 w-full h-[80vh] max-w-md rounded-t-3xl space-y-5">
+        <div>
+          <h1 className="font-bold text-xl text-center mb-4">Lupa Password</h1>
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+            <label>
+              <p>Masukan Email</p>
+              <input name="email" type="text" placeholder="example@gmail.com" className="input-text" onChange={(e)=>setEmail(e.target.value)} required/>
+            </label>
+            <button type="submit" className="btn-primary">{loading ? 'Loading...':'Send'}</button>
+          </form>
+        </div>
+        <div className='flex-col hidden'>
+          <div className='flex items-center justify-center'>
+            <hr className='border-black w-full mx-5'/>
+            <p>Atau</p>
+            <hr className='border-black w-full mx-5'/>
+          </div>
+        </div>
+        <Link className='btn-light justify-center hidden' to='/register'>Register</Link>
       </section>
     </div>
   )

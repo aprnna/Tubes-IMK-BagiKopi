@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/api';
+import { toast } from 'react-toastify';
 
 
 export default function LoginAdmin() {
@@ -8,6 +9,7 @@ export default function LoginAdmin() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
+  
   async function handleLogin(e) {
     e.preventDefault();
     setLoading(true)
@@ -15,12 +17,13 @@ export default function LoginAdmin() {
       email: email,
       password: password
     }).finally(()=> setLoading(false));
-    if (error) return alert('Email atau password salah');
+    if (error) return toast.error('Email atau password salah');
     const { data:userData } = await supabase.from('users').select().eq('id', data.user.id).single();
     console.log(userData);
     if (userData.role !== 'admin'){
+      toast.error('Unauthorized');
       await supabase.auth.signOut();
-      return alert('Anda bukan admin');
+      return
     } 
     navigate('/admin/dashboard');
     window.location.reload();

@@ -2,23 +2,26 @@ import React from 'react'
 import { supabase } from '../lib/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 export default function CheckoutProduct({ cart, product }) {
   const { name, img_link, price } = product
   const { id:idCart, cupsize, quantity, subtotal } = cart
+
   async function increaseQuantity(){
     const newQuantity = quantity+1
     const { error } = await supabase.from('orders').update({ quantity: newQuantity, subtotal:subtotal*newQuantity }).eq('id', idCart)
-    if(error) return alert(error.message)
+    if(error) return toast.error(error.message)
     window.location.reload()
   }
+
   async function decreaseQuantity(){
     const newQuantity = quantity - 1
     if ( newQuantity ===  0) {
       const { error } = await supabase.from('orders').delete().eq('id', idCart)
-      if(error) return alert(error.message)
+      if(error) return toast.error(error.message)
     }else{
       const { error } = await supabase.from('orders').update({ quantity: newQuantity, subtotal:price*newQuantity }).eq('id', idCart)
-      if(error) return alert(error.message)
+      if(error) return toast.error(error.message)
     }
     window.location.reload()
   }

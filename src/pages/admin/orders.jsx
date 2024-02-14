@@ -23,7 +23,7 @@ export default function Orders() {
   }
   const columns = ['OrderID', 'Tanggal', 'Nama Pembeli', 'Total Pembelian','Status']
   return (
-    <section className='p-4 space-y-5'>
+    <section className='space-y-5'>
       <section>
         <h1 className='font-bold text-xl'>List Users</h1>
       </section>

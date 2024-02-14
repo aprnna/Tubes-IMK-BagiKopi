@@ -21,9 +21,10 @@ import CreateProduct from "./pages/admin/createProduct";
 import Users from "./pages/admin/users";
 import EditProduct from "./pages/admin/editProduct";
 import Orders from "./pages/admin/orders";
-import LayoutAdmin from "./layouts/layourAdmin";
 import ResetPassword from "./pages/resetPassword";
 import ForgetPassword from "./pages/forgetPassword";
+import 'react-toastify/dist/ReactToastify.css';
+import LayoutAdmin from "./layouts/layoutAdmin";
 
 function App() {
   return (

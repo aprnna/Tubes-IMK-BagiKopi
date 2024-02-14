@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../../lib/api'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function CreateProduct() {
   const [categories, setCategories] = useState([])
@@ -22,7 +23,7 @@ export default function CreateProduct() {
   async function handleSubmit(e){
     e.preventDefault()
     const { data:uploadfile, error } = await supabase.storage.from('product').upload(`upload/${formData.name}`, formData.img)
-    if (error) return alert(error.message)
+    if (error) return toast.error(error.message)
     const { data } = await supabase.storage.from('product').getPublicUrl(`${uploadfile.path}`)
     const {error:productError} = await supabase.from('products').insert({
       name: formData.name,
@@ -31,8 +32,8 @@ export default function CreateProduct() {
       price: formData.price,
       id_category: formData.id_category,
     })
-    if (productError) return alert(productError.message)
-    alert('Product berhasil ditambahkan')
+    if (productError) return toast.error(productError.message)
+    toast.success('Produk berhasil ditambahkan')
     navigate('/admin/products') 
   }
 
@@ -43,18 +44,18 @@ export default function CreateProduct() {
     })
   }
   return (
-    <section className='p-5 space-y-5'>
+    <section className='space-y-5 w-full'>
       <section>
-        <h1 className='text-xl font-bold'>Buat Produk</h1>
+        <h1 className='text-2xl font-bold'>Tambah Produk</h1>
       </section>
-      <form onSubmit={handleSubmit} className='flex flex-col max-w-96 space-y-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col w-full p-8 rounded-xl space-y-4 bg-white'>
         <label htmlFor="name-product">
           <p>Name Product</p>
           <input 
           name='name' 
           id='name-product' 
           type="text" 
-          placeholder='Name Product' 
+          placeholder='Masukan name Produk' 
           className='input-text' 
           onChange={(e)=>handleChange('name',e.target.value)}
           required
@@ -67,21 +68,9 @@ export default function CreateProduct() {
             id="description-product" 
             cols="30" 
             rows="10" 
-            placeholder='Description' 
+            placeholder='Masukan descripsi' 
             className='input-text'
             onChange={(e)=>handleChange('description',e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="price-product">
-          <p>Price Product</p>
-          <input 
-            type="number" 
-            name="price" 
-            id="price-product" 
-            placeholder='Price' 
-            className='input-text'
-            onChange={(e)=>handleChange('price',e.target.value)}
             required
           />
         </label>
@@ -90,11 +79,11 @@ export default function CreateProduct() {
           <select 
             name="category" 
             id="category-product" 
-            className='input-text'
+            className='input-text hover:bg-transparent'
             onChange={(e)=>handleChange('id_category',e.target.value)}
             required
           >
-            <option value="">Select Category</option>
+            <option value="">Pilih kategori yang tersedia</option>
             {categories.map((category)=>{
               return (
                 <option key={category.id} value={category.id}>{category.name}</option>
@@ -113,7 +102,22 @@ export default function CreateProduct() {
             required
           /> 
         </label>
-        <button className='btn-primary w-fit'>Submit</button>
+        <label htmlFor="price-product">
+          <p>Harga Produk</p>
+          <input 
+            type="number" 
+            name="price" 
+            id="price-product" 
+            placeholder='Price' 
+            className='input-text'
+            onChange={(e)=>handleChange('price',e.target.value)}
+            required
+          />
+        </label>
+        <div className='flex gap-3 justify-end'>
+          <Link to='/admin/products' className='btn-light w-fit'>Cancel</Link>
+          <button type='submit' className='btn-primary w-fit'>Save Produk</button>
+        </div>
       </form>
     </section>
   )

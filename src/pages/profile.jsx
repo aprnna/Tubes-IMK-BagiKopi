@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/auth-context'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { toast } from 'react-toastify'
 
 export default function Profile() {
   const user = useAuth()
@@ -18,7 +19,7 @@ export default function Profile() {
       .select()
       .eq('id', user.id)
       .single()
-    if (error) return alert(error.message)
+    if (error) return toast.error(error.message)
     setUpdateUser({
       ...updateUser,
       name: data.name,
@@ -39,8 +40,9 @@ export default function Profile() {
         phone: updateUser.phone,
       })
       .eq('id', user.id)
-    if (error) return alert(error.message)
-    alert('Profile updated!')
+    if (error) return toast.error(error.message)
+    toast.success('Profile updated!')
+    window.location.reload()
   }
 
   function handleChange(e) {

@@ -6,13 +6,14 @@ import { supabase } from '../lib/api'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/auth-context'
 import Loading from '../components/Loading'
+import { toast } from 'react-toastify'
 
 export default function DetailProduct() {
   const navigate = useNavigate()
   const user = useAuth()
   const [product, setProduct] = useState({})
   const [cupSize, setCupSize] = useState([])
-  const [selectedCupSize, setSelectedCupSize] = useState('Reguler')
+  const [selectedCupSize, setSelectedCupSize] = useState('')
   const [addPrice, setAddPrice] = useState(0)
   const [subTotal, setSubTotal] = useState(0)
   const [qty, setQty] = useState(1)
@@ -37,7 +38,7 @@ export default function DetailProduct() {
     setQty(qty+1)
   }
   function decreaseQty() {
-    if(qty <= 1) return alert('Qty tidak boleh kurang dari 1')
+    if(qty <= 1) return toast.warn('Qty tidak boleh kurang dari 1')
     setQty(qty-1)
   }
   function handleSelectCupSize(cupsize, addPrice) {
@@ -59,8 +60,8 @@ export default function DetailProduct() {
         cupsize: selectedCupSize,
       }
     )
-    if(error) return alert(error.message)
-    alert('Berhasil ditambahkan ke keranjang')
+    if(error) return toast.error(error.message)
+    toast.success('Ditambahkan ke keranjang')
     navigate('/product-list')
   }
   if (loading) return <Loading/>

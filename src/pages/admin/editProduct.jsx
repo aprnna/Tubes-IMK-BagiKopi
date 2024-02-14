@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/api'
+import { toast } from 'react-toastify'
 
 export default function EditProduct() {
   const { id } = useParams()
@@ -38,12 +39,12 @@ export default function EditProduct() {
         price: updatedProduct.price,
         id_category: updatedProduct.id_category,
       }).eq('id',id)
-      if (error) return alert(error.message)
-      alert('Product berhasil diupdate')
+      if (error) return toast.error(error.message)
+      toast.success('Produk berhasil diupdate')
       return
     }
     const { data:uploadfile, error } = await supabase.storage.from('product').upload(`upload/${updatedProduct.name}`, updatedProduct.img)
-    if (error) return alert(error.message)
+    if (error) return toast.error(error.message)
     const { data } = await supabase.storage.from('product').getPublicUrl(`${uploadfile.path}`)
     const { error:errorUpdate } = await supabase.from('products').update({
       name: updatedProduct.name,
@@ -52,13 +53,13 @@ export default function EditProduct() {
       id_category: updatedProduct.id_category,
       img_link: data.publicUrl,
     }).eq('id',id)
-    if (errorUpdate) return alert(error.message)
-    alert('Product berhasil diupdate')
+    if (errorUpdate) return toast.error(error.message)
+    toast.success('Product berhasil diupdate')
     navigate('/admin/products')
   }
   if(loading) return <div>Loading...</div>
   return (
-    <section className='space-y-5 p-5'>
+    <section className='space-y-5'>
       <section>
         <h1 className='text-xl font-bold'>Edit Produk</h1>
       </section>

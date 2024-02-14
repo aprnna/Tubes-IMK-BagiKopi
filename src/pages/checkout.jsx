@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/api';
 import { useAuth } from '../contexts/auth-context';
 import CheckoutProduct from '../components/checkoutProduct';
+import Loading from '../components/Loading';
+import { toast } from 'react-toastify';
 
 export default function Checkout() {
   const user = useAuth();
@@ -31,10 +33,10 @@ export default function Checkout() {
   }, [])
 
   function handleCheckout () {
-    if(!tableNumber) return alert('No Bangku harus diisi')
+    if(!tableNumber) return toast.warn('Masukan nomor meja anda')
     navigate(`/payment/${tableNumber}`)
   }
-
+  if (loading) return <Loading/>
   return (
     <>
       <section className='min-h-[90vh] bg-gray-100 space-y-4'>
@@ -49,7 +51,7 @@ export default function Checkout() {
         <section className='bg-white p-4 space-y-4'>
           <div className='flex justify-between'>
             <h1 className='font-bold text-lg'>Detail Pesanan</h1>
-            <button className='btn-primary text-xs'>Tambah</button>
+            <Link className='btn-primary text-xs' to='/product-list'>Tambah</Link>
           </div>
           <div className='space-y-4'>
             {!loading && cart.map((item) => {

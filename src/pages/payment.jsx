@@ -4,6 +4,8 @@ import { useAuth } from "../contexts/auth-context";
 import { faSackDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from "react-router-dom";
+import formatRupiah from "../utils/formatRupiah";
+import { toast } from "react-toastify";
 export function Payment() {
   const user = useAuth(); 
   const { tn } = useParams();
@@ -22,7 +24,7 @@ export function Payment() {
 
   async function handlePayment(e, canceled = false){
     e.preventDefault()
-    if (!selectedMethod) return alert('Pilih metode pembayaran')
+    if (!selectedMethod) return toast.warn('Pilih metode pembayaran')
     const { data, error:error1 } = await supabase.from('transactions').insert(
       { 
         id_user: user.id,
@@ -32,10 +34,10 @@ export function Payment() {
         table_number: tn
       }
     ).select().single()
-    if(error1) return alert(error1.message)
+    if(error1) return toast.error(error1.message)
     const { error:error2 } = await supabase.from('orders').update({ id_transaction:data.id,oncart: false }).eq('id_user', user.id).eq('oncart', true)
-    if(error2) return alert(error2.message)
-    alert(`Berhasil ${canceled?'membatalkan':'melakukan'} pembayaran`)
+    if(error2) return toast.error(error2.message)
+    canceled ? toast.error(`Membatalkan pembayaran`) : toast.success('Pembayaran berhasil')
     navigate('/history-transaction')
   }
   return (
@@ -43,7 +45,7 @@ export function Payment() {
       <section className="min-h-[90vh]">
         <header className="text-center p-4">
           <h4 className="text-lg font-bold py-4">Pembayaran</h4>
-          <h1 className="text-2xl font-bold">Rp. {totalPrice}</h1>
+          <h1 className="text-2xl font-bold">{formatRupiah(totalPrice)}</h1>
         </header>
         <section className="p-4 space-y-4">
           { methodPayment.map((method) => {

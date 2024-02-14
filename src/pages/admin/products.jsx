@@ -4,6 +4,7 @@ import { TruncateText } from '../../utils/truncateText'
 import formatRupiah from '../../utils/formatRupiah'
 import { getDayDate } from '../../utils/processDate'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function Products() {
   const [products, setProducts] = useState([])
@@ -30,21 +31,21 @@ export default function Products() {
   }
   async function handleDelete(id){
     const { error } = await supabase.from('products').delete().eq('id',id)
-    if (error) return alert(error.message)
-    alert('Product berhasil dihapus')
+    if (error) return toast.error(error.message)
+    toast.success('Product berhasil dihapus')
     window.location.reload()
   }
 
 
   const columns = ['Name', 'Category', 'Deskripsi', 'Harga', 'Dibuat', 'Action']
   return (
-    <section className='p-4 space-y-3'>
+    <section className='space-y-3'>
       <section>
         <h1 className='font-bold text-2xl'>List Produk</h1>
       </section>
       <section className='flex items-center justify-end gap-2'>
         <input type="text" placeholder='Search name produk' className='input-text text-sm' onChange={handleSearch}/>
-        <Link className='btn-primary text-sm' to='create'>Tambah Product</Link>
+        <Link className='btn-primary text-sm w-full max-w-fit' to='create'>Tambah Produk</Link>
       </section>
       <section className='p-4'>
         <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">

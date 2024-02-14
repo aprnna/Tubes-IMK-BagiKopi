@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import { supabase } from "../lib/api"
 import { useAuth } from "../contexts/auth-context"
+import { toast } from "react-toastify"
 
 export default function DetailProfile() {
     const user = useAuth()
     async function handleLogout(e) {
         e.preventDefault()
         const { error } = await supabase.auth.signOut()
-        if (error) return alert(error.message)
+        if (error) return toast.error('Gagal Logout')
+        toast.success('Berhasil Logout')
     }
     return (
         <section className='bg-white'>
