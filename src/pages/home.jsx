@@ -19,7 +19,7 @@ export default function Home() {
   }
   return (
     <section className='bg-white'>
-      <div className="w-full h-56 bg-cover overflow-auto relative bg-center" style={bgBanner}/>
+      <div className="w-full h-56 bg-contain bg-no-repeat bg-[#0069DC] bg-top" style={bgBanner}/>
       <div className="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
         <p className="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
       </div>
@@ -33,8 +33,8 @@ export default function Home() {
           <p className="font-medium text-xl">Pesanan</p>
         </Link>
       </div>
-      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover bg-center" style={bgPicture1}></div>
-      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover bg-center" style={bgPicture2}></div>
+      <div className="max-w-lg h-32 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-contain bg-[#0077F9] bg-no-repeat bg-bottom" style={bgPicture1}></div>
+      <div className="max-w-lg h-32 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-contain bg-[#0069DC] bg-no-repeat bg-bottom" style={bgPicture2}></div>
     </section>
   )
 }

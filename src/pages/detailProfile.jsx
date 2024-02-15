@@ -13,7 +13,7 @@ export default function DetailProfile() {
     }
     return (
         <section className='bg-white'>
-            <img src="/images/backgroundProfile.png" alt="backgroundProfile" className="w-full" />
+            <img src="/images/backgroundProfile.png" alt="backgroundProfile" className="w-full h-48 bg-cover" />
             <div className="w-full h-48 flex flex-col justify-end p-5 absolute top-0">
                 <div className="flex flex-col px-5">
                     <img src='/images/profilepicture.jpg' alt='back' width="75" className="rounded-full" />

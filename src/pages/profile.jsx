@@ -63,21 +63,27 @@ export default function Profile() {
         </Link>
         <p className="text-xl text-white">Profile Saya</p>
       </div>
-      <div className="w-full h-auto relative">
-        <div className="h-28 rounded-full relative w-28 bg-cover top-9 left-40" style={bgPicture2}>
+      <div className="w-full h-auto">
+        <div className="h-28 rounded-full w-28 bg-cover mx-auto" style={bgPicture2}>
           {/* <button>
             <img src='\images\gallery.png' alt='edit' width="20" class="absolute bottom-2 right-2" />
           </button> */}
         </div>
-        <div className="w-full h-96 mt-14 relative">
-          <form onSubmit={handleUpdateProfile} className='relative'>
-            <p className="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Nama</p>
-            <input name='name' type='text' placeholder='Name' value={updateUser.name} onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <p className="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Email</p>
-            <input name='email' type='email' placeholder='Email' value={updateUser.email} disabled onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <p className="ml-7 mt-4 font-light text-lg text-[#a7a7a7]">Nomor Handphone</p>
-            <input name='phone' type='text' placeholder='Nomor Handphone' value={updateUser.phone} inputMode='numeric' pattern="\d*" onChange={handleChange} className='input-text w-96 h-auto ml-7 mt-1' />
-            <button className='ml-7 mt-7 w-96 h-12 bg-[#4171b9] rounded-lg text-white font-semibold text-lg'>Simpan</button>
+        <div className="w-full h-96">
+          <form onSubmit={handleUpdateProfile} className='w-full px-10 space-y-10'>
+            <label>
+              <p className="font-light text-lg text-[#a7a7a7]">Nama</p>
+              <input name='name' type='text' placeholder='Name' value={updateUser.name} onChange={handleChange} className='input-text' />
+            </label>
+            <label>
+              <p className="font-light text-lg text-[#a7a7a7]">Email</p>
+              <input name='email' type='email' placeholder='Email' value={updateUser.email} disabled onChange={handleChange} className='input-text' />
+            </label>
+            <label>
+              <p className="font-light text-lg text-[#a7a7a7]">Nomor Handphone</p>
+              <input name='phone' type='text' placeholder='Nomor Handphone' value={updateUser.phone} inputMode='numeric' pattern="\d*" onChange={handleChange} className='input-text' />
+            </label>
+            <button className='btn-primary w-full'>Simpan</button>
           </form>
         </div>
       </div>
