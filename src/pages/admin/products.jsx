@@ -41,7 +41,7 @@ export default function Products() {
   return (
     <section className='space-y-3'>
       <section>
-        <h1 className='font-bold text-2xl'>List Produk</h1>
+        <h1 className='font-bold text-2xl'>Menu</h1>
       </section>
       <section className='flex items-center justify-end gap-2'>
         <input type="text" placeholder='Search name produk' className='input-text text-sm' onChange={handleSearch}/>

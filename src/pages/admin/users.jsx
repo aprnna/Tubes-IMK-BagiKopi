@@ -20,9 +20,9 @@ export default function Users() {
   }
   const columns = ['Name', 'Email', 'Phone', 'Terdaftar']
   return (
-    <section className='p-4 space-y-5'>
+    <section className='space-y-5'>
       <section>
-        <h1 className='font-bold text-xl'>List Users</h1>
+        <h1 className='font-bold text-2xl'>List Users</h1>
       </section>
       <section className='flex items-center justify-end'>
         <input type="text" placeholder='Search name user' className='input-text' onChange={handleSearch}/>

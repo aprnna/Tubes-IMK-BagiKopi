@@ -55,7 +55,7 @@ export function Payment() {
                   {method.icon ? <img src={method.icon} alt="icon-payment" className="h-12"/>: <FontAwesomeIcon icon={faSackDollar} size="2xl" className="mx-3"/>}
                   <span>{method.name}</span>
                 </label> 
-                <input type="radio" name="payment" id={method.id} onClick={()=>setSelectedMethod(method.name)} className="w-4 h-4 text-blue-600 bg-pink-300  focus:ring-blue-500 focus:ring-2"/>
+                <input type="radio" name="payment" id={method.id} onClick={()=>setSelectedMethod(method.name)} className="w-4 h-4 text-blue-600 focus:ring-blue-500 focus:ring-2"/>
               </div>
             )
           })}

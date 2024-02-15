@@ -25,10 +25,10 @@ export default function Orders() {
   return (
     <section className='space-y-5'>
       <section>
-        <h1 className='font-bold text-xl'>List Users</h1>
+        <h1 className='font-bold text-2xl'>List Pesanan</h1>
       </section>
       <section className='flex items-center justify-end'>
-        <input type="text" placeholder='Search name user' className='input-text' onChange={handleSearch}/>
+        <input type="text" placeholder='Search name pembeli' className='input-text' onChange={handleSearch}/>
       </section>
       <section className='p-4'>
         <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">
@@ -73,7 +73,7 @@ export default function Orders() {
                       </p>
                     </td>
                     <td className="p-4">
-                      <p className={`block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 p-2 px-4 w-fit rounded-md ${isCanceled?'bg-red-300':'bg-green-300'}`}>
+                      <p className={`w-full block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 p-2 px-4 text-center rounded-md ${isCanceled?'bg-red-300':'bg-green-300'}`}>
                         {isCanceled ? 'Pesanan Gagal':'Pesanan Berhasil'}
                       </p>
                     </td>
