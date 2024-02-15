@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 export default function Register() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     fullName: '',
@@ -17,6 +18,7 @@ export default function Register() {
     e.preventDefault();
     if (!formData.email || !formData.fullName || !formData.phoneNumber || !formData.password || !formData.confirmPassword) return toast.warn('Mohon isi semua data');
     if (formData.password !== formData.confirmPassword) return toast.error('Password tidak sama');
+    setLoading(true);
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -34,6 +36,8 @@ export default function Register() {
       .eq('id', data.user.id)
       .then(() => navigate('/login'))
       .catch(error => toast.error(error.message));
+    setLoading(false);
+    toast.success('Registrasi berhasil, silahkan login'); 
   }
 
   const handleChange = (e) => {
@@ -74,7 +78,7 @@ export default function Register() {
             <p>Konfirmasi password</p>
             <input name="confirmPassword" type="password" placeholder="********" className="input-text" onChange={handleChange} required/>
           </label>
-          <button type="submit" className="btn-primary">Register</button>
+          <button type="submit" className="btn-primary">{loading ? 'Loading...':'Register'}</button>
         </form>
         <p className="mt-4 text-center pb-5">Sudah Memiliki Account? <Link to="/login" className="font-bold text-accent3">Login disini</Link></p>
       </section>
