@@ -3,8 +3,10 @@
 
 
 # Bagi Kopi 
+ 
+Bagi kopi adalah sebuah aplikasi yang inovatif yang dirancang untuk memudahkan pengguna dalam menjelajahi dan menemukan kopi yang sempurna untuk mereka rasakan karena di bagi kopi menyedikan deskripsi tentang kopi kopi yang disediakan. Pengguna juga dapat dengan mudah memilih kopi karena sistem akan merekomendasikan kopi yang paling banyak orang pesan atau orang sukai. Di bagi kopi juga pengguna dapat melakukan pemesanan dan pembayaran secara cash atau cashless dalam melakukan transaksi sehingga mereka tidak perlu mengalami antrian di kedai kopi. Dengan bagi kopi semua transaksi dan pemesanan akan tercatat dengan terstruktur dan terurut sehingga pemilik kedai tidak kesusahan dalam melakukan analisa keuangan atau memeriksa pesanan yang dipesan oleh pelanggannya.
+Project ini ditujukan untuk memenuhi tugas besar IMK (Interaksi Manusia dan Komputer).
 
-Project ini ditujukan untuk memenuhi tugas besar IMK (Interaksi Manusia dan Komputer) 
 ## Installation Steps
 
 Clone the project
