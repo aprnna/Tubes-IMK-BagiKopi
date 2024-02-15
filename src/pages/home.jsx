@@ -7,19 +7,19 @@ export default function Home() {
   const user = useAuth()
   const bgBanner = {
     backgroundImage:
-      "url(/images/banner.jpg)"
+      "url(/images/banner2.png)"
   }
   const bgPicture1 = {
     backgroundImage:
-      "url(/images/picture1.jpg)"
+      "url(/images/banner3.png)"
   }
   const bgPicture2 = {
     backgroundImage:
-      "url(/images/picture2.jpg)"
+      "url(/images/banner4.png)"
   }
   return (
     <section className='bg-white'>
-      <div className="w-full h-56 bg-cover overflow-auto relative" style={bgBanner}/>
+      <div className="w-full h-56 bg-cover overflow-auto relative bg-center" style={bgBanner}/>
       <div className="max-w-lg border bg-white rounded-xl mx-auto shadow-lg p-5 relative -top-6 mr-2 ml-2">
         <p className="font-medium text-md">Halo {user.signIn ? user.name :''}, ingin pesan apa hari ini?</p>
       </div>
@@ -33,8 +33,8 @@ export default function Home() {
           <p className="font-medium text-xl">Pesanan</p>
         </Link>
       </div>
-      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture1}></div>
-      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover" style={bgPicture2}></div>
+      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover bg-center" style={bgPicture1}></div>
+      <div className="max-w-lg h-36 rounded-xl shadow-lg mr-2 ml-2 mt-4 bg-cover bg-center" style={bgPicture2}></div>
     </section>
   )
 }
