@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { supabase } from '../lib/api'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
 export default function ForgetPassword() {
   const [email,setEmail] = useState('')
   const [loading,setLoading] = useState(false)
+
   async function handleSubmit(e){
     e.preventDefault()
     if (!email) return toast.warn('Masukan email terlebih dahulu')
     setLoading(true)
     await toast.promise(
       supabase.auth.resetPasswordForEmail(email,{
-        redirectTo: 'https://tubes-imk-bagi-kopi.vercel.app/reset-password'
+        redirectTo: 'https://tubes-imk-bagi-kopi.vercel.app/reset-password/'
       }),
       { 
         pending: 'Sedang diproses...', 

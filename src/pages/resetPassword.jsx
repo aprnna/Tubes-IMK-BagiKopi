@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { supabase } from '../lib/api'
-import { Button } from '@tremor/react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
@@ -48,7 +47,7 @@ export default function ResetPassword() {
             <p>Konfirmasi password baru</p>
             <input name="confirmPassword" type="password" placeholder="*******" className="input-text" onChange={handleChange} required/>
           </label>
-          <Button type="submit" className="btn-primary">Reset Password</Button>
+          <button type="submit" className="btn-primary">Reset Password</button>
         </form>
       </section>
     </div>

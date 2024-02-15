@@ -16,7 +16,7 @@ export default function Register() {
   async function handleRegister(e) {
     e.preventDefault();
     if (!formData.email || !formData.fullName || !formData.phoneNumber || !formData.password || !formData.confirmPassword) return toast.warn('Mohon isi semua data');
-    if (formData.password !== formData.confirmPassword) return toast.warn('Password tidak sama');
+    if (formData.password !== formData.confirmPassword) return toast.error('Password tidak sama');
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -54,10 +54,6 @@ export default function Register() {
       </div>
       <section className="bg-white rounded-b-md shadow-md p-5 px-12 w-full max-w-md rounded-t-3xl">
         <form onSubmit={handleRegister} className="flex flex-col space-y-3">
-          <label className="text-sm">
-            <p>Email</p>
-            <input name="email" type="text" placeholder="example@gmail.com" className="input-text" onChange={handleChange} required/>
-          </label>
           <label>
             <p>Nama Panjang</p>
             <input name="fullName" type="text" placeholder="John Doe" className="input-text" onChange={handleChange} required/>
@@ -65,6 +61,10 @@ export default function Register() {
           <label>
             <p>Nomor telpon</p>
             <input name="phoneNumber" type="text" inputmode="numeric" pattern="\d*" placeholder="08XXXXXXX" className="input-text" onChange={handleChange} required/>
+          </label>
+          <label className="text-sm">
+            <p>Email</p>
+            <input name="email" type="text" placeholder="example@gmail.com" className="input-text" onChange={handleChange} required/>
           </label>
           <label>
             <p>Password</p>
