@@ -7,10 +7,11 @@ export default function ForgetPassword() {
   const [loading,setLoading] = useState(false)
   async function handleSubmit(e){
     e.preventDefault()
+    if (!email) return toast.warn('Masukan email terlebih dahulu')
     setLoading(true)
     await toast.promise(
       supabase.auth.resetPasswordForEmail(email,{
-        redirectTo: 'http://localhost:3000/reset-password'
+        redirectTo: 'https://tubes-imk-bagi-kopi.vercel.app/reset-password'
       }),
       { 
         pending: 'Sedang diproses...', 
