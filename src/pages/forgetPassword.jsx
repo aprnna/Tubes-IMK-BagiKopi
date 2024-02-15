@@ -37,7 +37,7 @@ export default function ForgetPassword() {
           <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
             <label>
               <p>Masukan Email</p>
-              <input name="email" type="text" placeholder="example@gmail.com" className="input-text" onChange={(e)=>setEmail(e.target.value)} required/>
+              <input name="email" type="email" placeholder="example@gmail.com" className="input-text" onChange={(e)=>setEmail(e.target.value)}/>
             </label>
             <button type="submit" className="btn-primary">{loading ? 'Loading...':'Send'}</button>
           </form>
