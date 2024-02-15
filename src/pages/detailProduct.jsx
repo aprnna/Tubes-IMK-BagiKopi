@@ -13,13 +13,14 @@ export default function DetailProduct() {
   const user = useAuth()
   const [product, setProduct] = useState({})
   const [cupSize, setCupSize] = useState([])
-  const [selectedCupSize, setSelectedCupSize] = useState('')
+  const [selectedCupSize, setSelectedCupSize] = useState('Regular')
   const [addPrice, setAddPrice] = useState(0)
   const [subTotal, setSubTotal] = useState(0)
   const [qty, setQty] = useState(1)
   const [loading, setLoading] = useState(true)
   const { id } = useParams()
   const { name, description, img_link, price }  = product
+
   useEffect(() => {
     async function getData() {
       const { data:products } = await supabase.from("products").select().eq('id', id).single();
@@ -28,6 +29,8 @@ export default function DetailProduct() {
       setCupSize(Cupsizes);
     }
     getData().then(()=>setLoading(false))
+    if (cupSize.length !== 0) setSelectedCupSize('Regular')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -64,6 +67,7 @@ export default function DetailProduct() {
     toast.success('Ditambahkan ke keranjang')
     navigate('/product-list')
   }
+
   if (loading) return <Loading/>
   return (
     <>
@@ -84,7 +88,7 @@ export default function DetailProduct() {
               return(
                 <button 
                   key={cup.id} 
-                  className={`text-center p-4 bg-gray-200 rounded-lg hover:bg-accent3/60 ${selectedCupSize === cup.cupsize?'bg-accent3/45 hover:bg-accent3/45':''}`} 
+                  className={`text-center p-4 bg-gray-200 rounded-lg ${selectedCupSize === cup.cupsize?'bg-blue-800/40':''}`} 
                   onClick={()=>handleSelectCupSize(cup.cupsize,cup.price)}
                 >
                   <h1 className='font-bold'>{cup.cupsize[0] === '1' ? "1L" : cup.cupsize[0]}</h1>
